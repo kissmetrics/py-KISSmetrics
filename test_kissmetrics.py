@@ -6,6 +6,7 @@ import unittest
 
 import KISSmetrics
 
+
 class KISSmetricsClientTestCase(unittest.TestCase):
 
   def setUp(self):
@@ -17,14 +18,6 @@ class KISSmetricsClientTestCase(unittest.TestCase):
   def test_client_http_object(self):
     http = self.client.http
     assert http.request('GET', 'http://httpbin.org').status == 200
-
-  def test_record_signature(self):
-    with pytest.raises(TypeError):
-      self.client.record()
-    with pytest.raises(TypeError):
-      self.client.record(person="foo@bar.baz")
-    with pytest.raises(TypeError):
-      self.client.record(event="fizz")
 
 
 class KISSmetricsRequestTestCase(unittest.TestCase):
