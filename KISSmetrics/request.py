@@ -18,12 +18,12 @@ from urllib import urlencode
 class Request:
 
     def __init__(self, key, person, event=None, timestamp=None,
-                 alias=None, properties={}):
+                 identity=None, properties={}):
         self.key = key
         self.person = person
         self.event = event
         self.timestamp = timestamp
-        self.alias = alias
+        self.identity = identity
         self.properties = properties
         self.query_string = self.create_query_string()
 
@@ -35,8 +35,8 @@ class Request:
             params[TIME_PARAM] = self.timestamp
         if self.event:
             params[EVENT_NAME_PARAM] = self.event
-        if self.alias:
-            params[ALIAS_PARAM] = self.alias
+        if self.identity:
+            params[ALIAS_PARAM] = self.identity
         for key, value in self.properties.items():
             params[key] = value
         return urlencode(params)
