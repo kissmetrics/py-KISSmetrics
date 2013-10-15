@@ -53,6 +53,10 @@ class KISSmetricsRequestFunctionsTestCase(unittest.TestCase):
     query_string = KISSmetrics.request.record(key='foo', person='bar', event='fizzed', timestamp=1381849312)
     assert query_string == "/e?_t=1381849312&_d=1&_k=foo&_n=fizzed&_p=bar"
 
+  def test_record_custom_uri(self):
+    query_string = KISSmetrics.request.record(key='foo', person='bar', event='fizzed', uri='/get')
+    assert query_string == "/get?_n=fizzed&_k=foo&_p=bar"
+
   def test_set(self):
     properties = {'cool': '1'}
     query_string = KISSmetrics.request.set(key='foo', person='bar', properties=properties)
@@ -63,6 +67,15 @@ class KISSmetricsRequestFunctionsTestCase(unittest.TestCase):
     query_string = KISSmetrics.request.set(key='foo', person='bar', properties=properties, timestamp=1381849312)
     assert query_string == '/t?_t=1381849312&cool=1&_d=1&_k=foo&_p=bar'
 
+  def test_set_custom_uri(self):
+    properties = {'cool': '1'}
+    query_string = KISSmetrics.request.set(key='foo', person='bar', properties=properties, uri='/get')
+    assert query_string == '/get?cool=1&_k=foo&_p=bar'
+
   def test_alias(self):
     query_string = KISSmetrics.request.alias(key='foo', person='bar', identity='baz')
     assert query_string == '/a?_n=baz&_k=foo&_p=bar'
+
+  def test_alias_custom_uri(self):
+    query_string = KISSmetrics.request.alias(key='foo', person='bar', identity='baz', uri='/get')
+    assert query_string == '/get?_n=baz&_k=foo&_p=bar'

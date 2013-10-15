@@ -9,18 +9,18 @@ from urllib import urlencode
 from KISSmetrics import QueryString
 
 
-def record(key, person, event, timestamp=None, properties={}):
+def record(key, person, event, timestamp=None, properties={}, uri=RECORD_URI):
     request = QueryString(key, person, event=event, timestamp=timestamp,
                           properties=properties)
-    return '%s?%s' % (RECORD_URI, request.query_string)
+    return '%s?%s' % (uri, request.query_string)
 
 
-def set(key, person, timestamp=None, properties={}):
+def set(key, person, timestamp=None, properties={}, uri=SET_URI):
     request = QueryString(key, person, timestamp=timestamp,
                           properties=properties)
-    return '%s?%s' % (SET_URI, request.query_string)
+    return '%s?%s' % (uri, request.query_string)
 
 
-def alias(key, person, identity):
+def alias(key, person, identity, uri=ALIAS_URI):
     request = QueryString(key, person, identity=identity)
-    return '%s?%s' % (ALIAS_URI, request.query_string)
+    return '%s?%s' % (uri, request.query_string)
