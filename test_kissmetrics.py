@@ -5,6 +5,16 @@ import pytest
 import unittest
 import json
 
+try:
+  from urlparse import parse_qs
+except:
+  from urllib.parse import parse_qs
+
+try:
+  from urlparse import urlparse
+except ImportError:
+  from urllib.parse import urlparse
+
 import KISSmetrics
 
 
@@ -39,17 +49,17 @@ class KISSmetricsClientIntegrationCase(unittest.TestCase):
 
   def test_record_key(self):
     response = self.client.record(person='bob', event='fizzed', uri='get')
-    data = json.loads(response.data)
+    data = json.loads(response.data.decode())
     assert data['args']['_k'] == 'foo'
 
   def test_record_person(self):
     response = self.client.record(person='bob', event='fizzed', uri='get')
-    data = json.loads(response.data)
+    data = json.loads(response.data.decode())
     assert data['args']['_p'] == 'bob'
 
   def test_record_event(self):
     response = self.client.record(person='bob', event='fizzed', uri='get')
-    data = json.loads(response.data)
+    data = json.loads(response.data.decode())
     assert data['args']['_n'] == 'fizzed'
 
   def test_set_success(self):
@@ -58,17 +68,17 @@ class KISSmetricsClientIntegrationCase(unittest.TestCase):
 
   def test_set_key(self):
     response = self.client.set(person='bob', properties={'cool': 1}, uri='get')
-    data = json.loads(response.data)
+    data = json.loads(response.data.decode())
     assert data['args']['_k'] == 'foo'
 
   def test_set_person(self):
     response = self.client.set(person='bob', properties={'cool': 1}, uri='get')
-    data = json.loads(response.data)
+    data = json.loads(response.data.decode())
     assert data['args']['_p'] == 'bob'
 
   def test_set_property(self):
     response = self.client.set(person='bob', properties={'cool': 1}, uri='get')
-    data = json.loads(response.data)
+    data = json.loads(response.data.decode())
     assert data['args']['cool'] == '1'
 
   def test_alias_success(self):
@@ -77,70 +87,115 @@ class KISSmetricsClientIntegrationCase(unittest.TestCase):
 
   def test_alias_person(self):
     response = self.client.alias(person='bob', identity='shadybob', uri='get')
-    data = json.loads(response.data)
+    data = json.loads(response.data.decode())
     assert data['args']['_p'] == 'bob'
 
   def test_alias_identity(self):
     response = self.client.alias(person='bob', identity='shadybob', uri='get')
-    data = json.loads(response.data)
+    data = json.loads(response.data.decode())
     assert data['args']['_n'] == 'shadybob'
 
 class KISSmetricsRequestTestCase(unittest.TestCase):
 
   def test_minimum(self):
     request = KISSmetrics.QueryString(key='foo', person='bar')
-    assert request.query_string == "_k=foo&_p=bar"
+    assert parse_qs(request.query_string)['_k'] == ['foo']
+    assert parse_qs(request.query_string)['_p'] == ['bar']
 
   def test_event(self):
     request = KISSmetrics.QueryString(key='foo', person='bar', event='fizzed')
-    assert request.query_string == "_n=fizzed&_k=foo&_p=bar"
+    assert parse_qs(request.query_string)['_k'] == ['foo']
+    assert parse_qs(request.query_string)['_p'] == ['bar']
+    assert parse_qs(request.query_string)['_n'] == ['fizzed']
 
   def test_set(self):
     properties = {'cool': '1'}
     request = KISSmetrics.QueryString(key='foo', person='bar', properties=properties)
-    assert request.query_string == 'cool=1&_k=foo&_p=bar'
+    assert parse_qs(request.query_string)['_k'] == ['foo']
+    assert parse_qs(request.query_string)['_p'] == ['bar']
+    assert parse_qs(request.query_string)['cool'] == ['1']
 
   def test_alias(self):
     request = KISSmetrics.QueryString(key='foo', person='bar', identity='baz')
-    assert request.query_string == '_n=baz&_k=foo&_p=bar'
+    assert parse_qs(request.query_string)['_k'] == ['foo']
+    assert parse_qs(request.query_string)['_p'] == ['bar']
+    assert parse_qs(request.query_string)['_n'] == ['baz']
 
   def test_timestamp(self):
     request = KISSmetrics.QueryString(key='foo', person='bar', timestamp=1381849312)
-    assert request.query_string == '_t=1381849312&_d=1&_k=foo&_p=bar'
+    assert parse_qs(request.query_string)['_k'] == ['foo']
+    assert parse_qs(request.query_string)['_p'] == ['bar']
+    assert parse_qs(request.query_string)['_d'] == ['1']
+    assert parse_qs(request.query_string)['_t'] == ['1381849312']
 
 class KISSmetricsRequestFunctionsTestCase(unittest.TestCase):
 
   def test_record(self):
     query_string = KISSmetrics.request.record(key='foo', person='bar', event='fizzed')
-    assert query_string == "e?_n=fizzed&_k=foo&_p=bar"
+    assert urlparse(query_string).path == 'e'
+    query_string = urlparse(query_string).query
+    assert parse_qs(query_string)['_k'] == ['foo']
+    assert parse_qs(query_string)['_p'] == ['bar']
+    assert parse_qs(query_string)['_n'] == ['fizzed']
 
   def test_record_with_timestamp(self):
     query_string = KISSmetrics.request.record(key='foo', person='bar', event='fizzed', timestamp=1381849312)
-    assert query_string == "e?_t=1381849312&_d=1&_k=foo&_n=fizzed&_p=bar"
+    assert urlparse(query_string).path == 'e'
+    query_string = urlparse(query_string).query
+    assert parse_qs(query_string)['_k'] == ['foo']
+    assert parse_qs(query_string)['_p'] == ['bar']
+    assert parse_qs(query_string)['_d'] == ['1']
+    assert parse_qs(query_string)['_t'] == ['1381849312']
 
   def test_record_custom_uri(self):
     query_string = KISSmetrics.request.record(key='foo', person='bar', event='fizzed', uri='get')
-    assert query_string == "get?_n=fizzed&_k=foo&_p=bar"
+    assert urlparse(query_string).path == 'get'
+    query_string = urlparse(query_string).query
+    assert parse_qs(query_string)['_k'] == ['foo']
+    assert parse_qs(query_string)['_p'] == ['bar']
+    assert parse_qs(query_string)['_n'] == ['fizzed']
 
   def test_set(self):
     properties = {'cool': '1'}
     query_string = KISSmetrics.request.set(key='foo', person='bar', properties=properties)
-    assert query_string == 't?cool=1&_k=foo&_p=bar'
+    assert urlparse(query_string).path == 't'
+    query_string = urlparse(query_string).query
+    assert parse_qs(query_string)['_k'] == ['foo']
+    assert parse_qs(query_string)['_p'] == ['bar']
+    assert parse_qs(query_string)['cool'] == ['1']
 
   def test_set_with_timestamp(self):
     properties = {'cool': '1'}
     query_string = KISSmetrics.request.set(key='foo', person='bar', properties=properties, timestamp=1381849312)
-    assert query_string == 't?_t=1381849312&cool=1&_d=1&_k=foo&_p=bar'
+    assert urlparse(query_string).path == 't'
+    query_string = urlparse(query_string).query
+    assert parse_qs(query_string)['_k'] == ['foo']
+    assert parse_qs(query_string)['_p'] == ['bar']
+    assert parse_qs(query_string)['_d'] == ['1']
+    assert parse_qs(query_string)['_t'] == ['1381849312']
+    assert parse_qs(query_string)['cool'] == ['1']
 
   def test_set_custom_uri(self):
     properties = {'cool': '1'}
     query_string = KISSmetrics.request.set(key='foo', person='bar', properties=properties, uri='get')
-    assert query_string == 'get?cool=1&_k=foo&_p=bar'
+    assert urlparse(query_string).path == 'get'
+    query_string = urlparse(query_string).query
+    assert parse_qs(query_string)['_k'] == ['foo']
+    assert parse_qs(query_string)['_p'] == ['bar']
+    assert parse_qs(query_string)['cool'] == ['1']
 
   def test_alias(self):
     query_string = KISSmetrics.request.alias(key='foo', person='bar', identity='baz')
-    assert query_string == 'a?_n=baz&_k=foo&_p=bar'
+    assert urlparse(query_string).path == 'a'
+    query_string = urlparse(query_string).query
+    assert parse_qs(query_string)['_k'] == ['foo']
+    assert parse_qs(query_string)['_p'] == ['bar']
+    assert parse_qs(query_string)['_n'] == ['baz']
 
   def test_alias_custom_uri(self):
     query_string = KISSmetrics.request.alias(key='foo', person='bar', identity='baz', uri='get')
-    assert query_string == 'get?_n=baz&_k=foo&_p=bar'
+    assert urlparse(query_string).path == 'get'
+    query_string = urlparse(query_string).query
+    assert parse_qs(query_string)['_k'] == ['foo']
+    assert parse_qs(query_string)['_p'] == ['bar']
+    assert parse_qs(query_string)['_n'] == ['baz']

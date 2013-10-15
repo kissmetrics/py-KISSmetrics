@@ -8,7 +8,10 @@ TIME_FLAG_PARAM = '_d'
 ALIAS_PARAM = '_n'
 
 
-from urllib import urlencode
+try:
+  from urllib import urlencode
+except ImportError:
+  from urllib.parse import urlencode
 
 
 class QueryString:
