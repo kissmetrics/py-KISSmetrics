@@ -1,5 +1,6 @@
 from client import Client
-from request import Request
+from query_string import QueryString
+import request
 
 __author__ = 'Ernest W. Durbin III <ewdurbin@gmail.com>'
 __license__ = 'MIT'

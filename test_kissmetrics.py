@@ -23,24 +23,24 @@ class KISSmetricsClientTestCase(unittest.TestCase):
 class KISSmetricsRequestTestCase(unittest.TestCase):
 
   def test_minimum(self):
-    request = KISSmetrics.Request(key='foo', person='bar')
+    request = KISSmetrics.QueryString(key='foo', person='bar')
     assert request.query_string == "_k=foo&_p=bar"
 
   def test_event(self):
-    request = KISSmetrics.Request(key='foo', person='bar', event='fizzed')
+    request = KISSmetrics.QueryString(key='foo', person='bar', event='fizzed')
     assert request.query_string == "_n=fizzed&_k=foo&_p=bar"
 
   def test_set(self):
     properties = {'cool': '1'}
-    request = KISSmetrics.Request(key='foo', person='bar', properties=properties)
+    request = KISSmetrics.QueryString(key='foo', person='bar', properties=properties)
     assert request.query_string == 'cool=1&_k=foo&_p=bar'
 
   def test_alias(self):
-    request = KISSmetrics.Request(key='foo', person='bar', identity='baz')
+    request = KISSmetrics.QueryString(key='foo', person='bar', identity='baz')
     assert request.query_string == '_n=baz&_k=foo&_p=bar'
 
   def test_timestamp(self):
-    request = KISSmetrics.Request(key='foo', person='bar', timestamp=1381849312)
+    request = KISSmetrics.QueryString(key='foo', person='bar', timestamp=1381849312)
     assert request.query_string == '_t=1381849312&_d=1&_k=foo&_p=bar'
 
 class KISSmetricsRequestFunctionsTestCase(unittest.TestCase):
