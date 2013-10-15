@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import KISSmetrics
+from KISSmetrics import request
 from urllib3 import PoolManager
 
 
@@ -20,11 +21,19 @@ class Client:
 
     def record(self, person, event, timestamp=None, properties={},
                uri=KISSmetrics.RECORD_URI):
-        pass
+        this_request = request.record(self.key, person, event, timestamp=timestamp,
+                                      properties=properties, uri=uri)
+        url = self.url(this_request)
+        return self.http.request('GET', url)
 
     def set(self, person, timestamp=None, properties={},
             uri=KISSmetrics.SET_URI):
-        pass
+        this_request = request.set(self.key, person, timestamp=timestamp,
+                                   properties=properties, uri=uri)
+        url = self.url(this_request)
+        return self.http.request('GET', url)
 
     def alias(self, person, identity, uri=KISSmetrics.ALIAS_URI):
-        pass
+        this_request = request.alias(self.key, person, identity, uri=uri)
+        url = self.url(this_request)
+        return self.http.request('GET', url)
