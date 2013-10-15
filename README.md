@@ -1,9 +1,9 @@
 py-KISSmetrics
 ==============
 
-**WARNING: Still under active development, do not go to prod**
+**WARNING: Still under active development, do not use this in Production**
 
-**do not go to prod**
+**Again, this is NOT ready for Production use.**
 
 KISSmetrics tracking API wrapper for Python
 
