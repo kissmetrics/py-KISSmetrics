@@ -16,7 +16,7 @@ class Client:
         self.http = PoolManager()
 
     def url(self, query_string):
-        return '%s://%s%s' % (self.trk_proto, self.trk_host, query_string)
+        return '%s://%s/%s' % (self.trk_proto, self.trk_host, query_string)
 
     def record(self, person, event, timestamp=None, properties={},
                uri=KISSmetrics.RECORD_URI):
