@@ -19,6 +19,9 @@ class KISSmetricsClientTestCase(unittest.TestCase):
     http = self.client.http
     assert http.request('GET', 'http://httpbin.org').status == 200
 
+  def test_client_url(self):
+    url = self.client.url('/e?_k=foo&_p=bar')
+    assert url == "http://trk.kissmetrics.com/e?_k=foo&_p=bar"
 
 class KISSmetricsRequestTestCase(unittest.TestCase):
 
