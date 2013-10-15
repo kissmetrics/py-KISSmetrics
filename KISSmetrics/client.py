@@ -10,6 +10,8 @@ class Client:
                  trk_proto=KISSmetrics.TRACKING_PROTOCOL):
         self.key = key
         self.trk_host = trk_host
+        if trk_proto not in ['http', 'https']:
+            raise ValueError('trk_proto must be one of (http, https)')
         self.trk_proto = trk_proto
         self.http = PoolManager()
 

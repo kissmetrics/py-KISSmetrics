@@ -23,6 +23,10 @@ class KISSmetricsClientTestCase(unittest.TestCase):
     url = self.client.url('/e?_k=foo&_p=bar')
     assert url == "http://trk.kissmetrics.com/e?_k=foo&_p=bar"
 
+  def test_client_protocol(self):
+    with pytest.raises(ValueError):
+      client = KISSmetrics.Client(key='foo', trk_proto='ssh')
+
 class KISSmetricsRequestTestCase(unittest.TestCase):
 
   def test_minimum(self):
