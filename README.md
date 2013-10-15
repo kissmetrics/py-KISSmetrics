@@ -1,6 +1,10 @@
 py-KISSmetrics
 ==============
 
+**WARNING: Still under active development, do not go to prod**
+
+**do not go to prod**
+
 KISSmetrics tracking API wrapper for Python
 
 ## Using this library
