@@ -37,6 +37,8 @@ class Request:
             params[EVENT_NAME_PARAM] = self.event
         if self.alias:
             params[ALIAS_PARAM] = self.alias
+        for key, value in self.properties.items():
+            params[key] = value
         return urlencode(params)
 
 

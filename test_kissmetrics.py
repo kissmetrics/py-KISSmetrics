@@ -37,6 +37,11 @@ class KISSmetricsRequestTestCase(unittest.TestCase):
     request = KISSmetrics.Request(key='foo', person='bar', event='fizzed')
     assert request.query_string == "_n=fizzed&_k=foo&_p=bar"
 
+  def test_set(self):
+    properties = {'cool': '1'}
+    request = KISSmetrics.Request(key='foo', person='bar', properties=properties)
+    assert request.query_string == 'cool=1&_k=foo&_p=bar'
+
   def test_alias(self):
     request = KISSmetrics.Request(key='foo', person='bar', alias='baz')
     assert request.query_string == '_n=baz&_k=foo&_p=bar'
