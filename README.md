@@ -4,6 +4,7 @@ py-KISSmetrics
 **WARNING: Still under active development, do not go to prod**
 
 [![Build Status](https://travis-ci.org/kissmetrics/py-KISSmetrics.png?branch=master)](https://travis-ci.org/kissmetrics/py-KISSmetrics)
+
 [![Coverage Status](https://coveralls.io/repos/kissmetrics/py-KISSmetrics/badge.png)](https://coveralls.io/r/kissmetrics/py-KISSmetrics)
 
 **do not go to prod**
