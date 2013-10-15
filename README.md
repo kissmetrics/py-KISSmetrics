@@ -2,10 +2,15 @@ py-KISSmetrics
 ==============
 
 **WARNING: Still under active development, do not go to prod**
-
+[![Build Status](https://travis-ci.org/kissmetrics/py-KISSmetrics.png?branch=master)](https://travis-ci.org/kissmetrics/py-KISSmetrics)
+[![Coverage Status](https://coveralls.io/repos/kissmetrics/py-KISSmetrics/badge.png)](https://coveralls.io/r/kissmetrics/py-KISSmetrics)
 **do not go to prod**
 
 KISSmetrics tracking API wrapper for Python
+
+Support for:
+  - Python 2.6, 2.6, 3.2, 3.3
+  - pypy 1.9
 
 ## Using this library
 
@@ -30,5 +35,6 @@ cd py-KISSmetrics
 virtualenv env
 source env/bin/activate
 pip install -r requirements.txt
+pip install -r test-requirements.txt
 py.test --cov KISSmetrics/
 ```
