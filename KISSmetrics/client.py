@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from urllib3 import PoolManager
 import KISSmetrics
+from urllib3 import PoolManager
 
 
 class Client:

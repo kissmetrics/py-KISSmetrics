@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from urllib import urlencode
 import KISSmetrics
 from KISSmetrics import QueryString
+from urllib import urlencode
 
 
 def record(key, person, event, timestamp=None, properties={},
