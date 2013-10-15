@@ -45,15 +45,15 @@ class Request:
 def record(key, person, event, timestamp=None, properties={}):
     request = Request(key, person, event=event, timestamp=timestamp,
                       properties=properties)
-    return request.query_string
+    return '%s?%s' % (RECORD_URI, request.query_string)
 
 
 def set(key, person, timestamp=None, properties={}):
     request = Request(key, person, timestamp=timestamp,
                       properties=properties)
-    return request.query_string
+    return '%s?%s' % (SET_URI, request.query_string)
 
 
 def alias(key, person, identity):
     request = Request(key, person, identity=identity)
-    return request.query_string
+    return '%s?%s' % (ALIAS_URI, request.query_string)
