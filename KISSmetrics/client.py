@@ -19,14 +19,14 @@ class Client:
     def url(self, query_string):
         return '%s://%s/%s' % (self.trk_proto, self.trk_host, query_string)
 
-    def record(self, person, event, timestamp=None, properties={},
+    def record(self, person, event, properties={}, timestamp=None,
                uri=KISSmetrics.RECORD_URI):
         this_request = request.record(self.key, person, event, timestamp=timestamp,
                                       properties=properties, uri=uri)
         url = self.url(this_request)
         return self.http.request('GET', url)
 
-    def set(self, person, timestamp=None, properties={},
+    def set(self, person, properties={}, timestamp=None,
             uri=KISSmetrics.SET_URI):
         this_request = request.set(self.key, person, timestamp=timestamp,
                                    properties=properties, uri=uri)
