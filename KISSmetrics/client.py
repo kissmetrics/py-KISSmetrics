@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from urllib3 import PoolManager
+import KISSmetrics
 
-TRACKING_HOSTNAME = 'trk.kissmetrics.com'
-TRACKING_PROTOCOL = 'http'
 
 class Client:
 
-    def __init__(self, key=None, trk_host=TRACKING_HOSTNAME,
-                 trk_protocol=TRACKING_PROTOCOL):
+    def __init__(self, key=None, trk_host=KISSmetrics.TRACKING_HOSTNAME,
+                 trk_protocol=KISSmetrics.TRACKING_PROTOCOL):
         self.key = key
         self.trk_host = trk_host
         self.trk_protocol = trk_protocol
