@@ -1,0 +1,6 @@
+
+# Virtualenv
+/env
+
+# Python Objects
+*.pyc
