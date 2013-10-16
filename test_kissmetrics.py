@@ -158,7 +158,7 @@ class KISSmetricsRequestFunctionsTestCase(unittest.TestCase):
   def test_set(self):
     properties = {'cool': '1'}
     query_string = KISSmetrics.request.set(key='foo', person='bar', properties=properties)
-    assert urlparse(query_string).path == 't'
+    assert urlparse(query_string).path == 's'
     query_string = urlparse(query_string).query
     assert parse_qs(query_string)['_k'] == ['foo']
     assert parse_qs(query_string)['_p'] == ['bar']
@@ -167,7 +167,7 @@ class KISSmetricsRequestFunctionsTestCase(unittest.TestCase):
   def test_set_with_timestamp(self):
     properties = {'cool': '1'}
     query_string = KISSmetrics.request.set(key='foo', person='bar', properties=properties, timestamp=1381849312)
-    assert urlparse(query_string).path == 't'
+    assert urlparse(query_string).path == 's'
     query_string = urlparse(query_string).query
     assert parse_qs(query_string)['_k'] == ['foo']
     assert parse_qs(query_string)['_p'] == ['bar']
