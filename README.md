@@ -1,17 +1,17 @@
 py-KISSmetrics
 ==============
 
-**WARNING: Still under active development, do not go to prod**
+**WARNING: Still under active development, do not use this in Production**
 
 [![Build Status](https://travis-ci.org/kissmetrics/py-KISSmetrics.png?branch=master)](https://travis-ci.org/kissmetrics/py-KISSmetrics)
 [![Coverage Status](https://coveralls.io/repos/kissmetrics/py-KISSmetrics/badge.png)](https://coveralls.io/r/kissmetrics/py-KISSmetrics)
 
-**do not go to prod**
+**Again, this is NOT ready for Production use.**
 
 KISSmetrics tracking API wrapper for Python
 
 Support for:
-  - Python 2.6, 2.6, 3.2, 3.3
+  - Python 2.6, 2.7, 3.2, 3.3
   - pypy 1.9
 
 ## Using this library

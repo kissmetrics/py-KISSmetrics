@@ -4,7 +4,7 @@ TRACKING_HOSTNAME = 'trk.kissmetrics.com'
 TRACKING_PROTOCOL = 'http'
 
 RECORD_URI = 'e'
-SET_URI = 't'
+SET_URI = 's'
 ALIAS_URI = 'a'
 
 __author__ = 'Ernest W. Durbin III <ewdurbin@gmail.com>'
