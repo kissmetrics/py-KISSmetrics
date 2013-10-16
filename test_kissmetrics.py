@@ -38,6 +38,34 @@ class KISSmetricsClientTestCase(unittest.TestCase):
     with pytest.raises(ValueError):
       client = KISSmetrics.Client(key='foo', trk_proto='ssh')
 
+class KISSmetricsClientCompatTestCase(unittest.TestCase):
+
+  def setUp(self):
+    self.client = KISSmetrics.ClientCompat(key='foo')
+
+  def test_compatibility_alias(self):
+    self.client = KISSmetrics.KM('foo')
+    assert self.client.client.key == 'foo'
+
+  def test_client_compat_key(self):
+    assert self.client.client.key == 'foo'
+
+  def test_client_compat_http_object(self):
+    http = self.client.client.http
+    assert http.request('GET', 'http://httpbin.org').status == 200
+
+  def test_client_compat_url(self):
+    url = self.client.url('e?_k=foo&_p=bar')
+    assert url == "http://trk.kissmetrics.com/e?_k=foo&_p=bar"
+
+  def test_client_compat_protocol(self):
+    with pytest.raises(ValueError):
+      client = KISSmetrics.ClientCompat(key='foo', trk_proto='ssh')
+
+  def test_client_compat_alias_protocol(self):
+    with pytest.raises(ValueError):
+      client = KISSmetrics.KM(key='foo', trk_proto='ssh')
+
 class KISSmetricsRequestTestCase(unittest.TestCase):
 
   def test_minimum(self):
