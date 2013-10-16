@@ -55,16 +55,12 @@ class KISSmetricsClientCompatTestCase(unittest.TestCase):
     assert http.request('GET', 'http://httpbin.org').status == 200
 
   def test_client_compat_url(self):
-    url = self.client.url('e?_k=foo&_p=bar')
+    url = self.client.client.url('e?_k=foo&_p=bar')
     assert url == "http://trk.kissmetrics.com/e?_k=foo&_p=bar"
 
   def test_client_compat_protocol(self):
     with pytest.raises(ValueError):
-      client = KISSmetrics.ClientCompat(key='foo', trk_proto='ssh')
-
-  def test_client_compat_alias_protocol(self):
-    with pytest.raises(ValueError):
-      client = KISSmetrics.KM(key='foo', trk_proto='ssh')
+      client = KISSmetrics.ClientCompat(key='foo', host='trk.kissmetrics.com:22') 
 
 class KISSmetricsRequestTestCase(unittest.TestCase):
 
