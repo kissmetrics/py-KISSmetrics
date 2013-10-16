@@ -9,9 +9,9 @@ ALIAS_PARAM = '_n'
 
 
 try:
-  from urllib import urlencode
+    from urllib import urlencode
 except ImportError:
-  from urllib.parse import urlencode
+    from urllib.parse import urlencode
 
 
 class QueryString:

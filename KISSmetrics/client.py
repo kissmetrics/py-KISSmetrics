@@ -7,7 +7,7 @@ from urllib3 import PoolManager
 
 class Client:
 
-    def __init__(self, key=None, trk_host=KISSmetrics.TRACKING_HOSTNAME,
+    def __init__(self, key, trk_host=KISSmetrics.TRACKING_HOSTNAME,
                  trk_proto=KISSmetrics.TRACKING_PROTOCOL):
         self.key = key
         self.trk_host = trk_host
@@ -21,7 +21,8 @@ class Client:
 
     def record(self, person, event, properties={}, timestamp=None,
                uri=KISSmetrics.RECORD_URI):
-        this_request = request.record(self.key, person, event, timestamp=timestamp,
+        this_request = request.record(self.key, person, event,
+                                      timestamp=timestamp,
                                       properties=properties, uri=uri)
         url = self.url(this_request)
         return self.http.request('GET', url)
