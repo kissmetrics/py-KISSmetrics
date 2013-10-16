@@ -12,4 +12,5 @@ __license__ = 'MIT'
 __version__ = 'develop'
 
 from .client import Client
+from .client_compat import ClientCompat
 from .query_string import QueryString

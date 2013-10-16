@@ -38,63 +38,6 @@ class KISSmetricsClientTestCase(unittest.TestCase):
     with pytest.raises(ValueError):
       client = KISSmetrics.Client(key='foo', trk_proto='ssh')
 
-class KISSmetricsClientIntegrationCase(unittest.TestCase):
-
-  def setUp(self):
-    self.client = KISSmetrics.Client(key='foo', trk_host='httpbin.org')
-
-  def test_record_success(self):
-    response = self.client.record(person='bob', event='fizzed', uri='get')
-    assert response.status == 200
-
-  def test_record_key(self):
-    response = self.client.record(person='bob', event='fizzed', uri='get')
-    data = json.loads(response.data.decode())
-    assert data['args']['_k'] == 'foo'
-
-  def test_record_person(self):
-    response = self.client.record(person='bob', event='fizzed', uri='get')
-    data = json.loads(response.data.decode())
-    assert data['args']['_p'] == 'bob'
-
-  def test_record_event(self):
-    response = self.client.record(person='bob', event='fizzed', uri='get')
-    data = json.loads(response.data.decode())
-    assert data['args']['_n'] == 'fizzed'
-
-  def test_set_success(self):
-    response = self.client.set(person='bob', properties={'cool': 1}, uri='get')
-    assert response.status == 200
-
-  def test_set_key(self):
-    response = self.client.set(person='bob', properties={'cool': 1}, uri='get')
-    data = json.loads(response.data.decode())
-    assert data['args']['_k'] == 'foo'
-
-  def test_set_person(self):
-    response = self.client.set(person='bob', properties={'cool': 1}, uri='get')
-    data = json.loads(response.data.decode())
-    assert data['args']['_p'] == 'bob'
-
-  def test_set_property(self):
-    response = self.client.set(person='bob', properties={'cool': 1}, uri='get')
-    data = json.loads(response.data.decode())
-    assert data['args']['cool'] == '1'
-
-  def test_alias_success(self):
-    response = self.client.alias(person='bob', identity='shadybob', uri='get')
-    assert response.status == 200
-
-  def test_alias_person(self):
-    response = self.client.alias(person='bob', identity='shadybob', uri='get')
-    data = json.loads(response.data.decode())
-    assert data['args']['_p'] == 'bob'
-
-  def test_alias_identity(self):
-    response = self.client.alias(person='bob', identity='shadybob', uri='get')
-    data = json.loads(response.data.decode())
-    assert data['args']['_n'] == 'shadybob'
-
 class KISSmetricsRequestTestCase(unittest.TestCase):
 
   def test_minimum(self):
