@@ -71,7 +71,7 @@ class ClientCompat:
             raise Exception('Need to initialize first (KM.init <your_key>)')
 
     def now(self):
-        return datetime.utcnow()
+        return datetime.datetime.utcnow()
 
     def check_id_key(self):
         self.check_init()
