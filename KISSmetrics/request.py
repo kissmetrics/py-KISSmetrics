@@ -5,7 +5,8 @@ import KISSmetrics
 
 def record(key, person, event, timestamp=None, properties={},
            uri=KISSmetrics.RECORD_URI):
-    request = KISSmetrics.QueryString(key, person, event=event, timestamp=timestamp,
+    request = KISSmetrics.QueryString(key, person, event=event,
+                                      timestamp=timestamp,
                                       properties=properties)
     return '%s?%s' % (uri, request.query_string)
 
