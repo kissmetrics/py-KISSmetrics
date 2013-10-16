@@ -1,0 +1,123 @@
+# -*- coding: utf-8 -*-
+
+import pytest
+import unittest
+import json
+
+import KISSmetrics
+
+
+class KISSmetricsClientIntegrationCase(unittest.TestCase):
+
+  def setUp(self):
+    self.client = KISSmetrics.Client(key='foo', trk_host='httpbin.org')
+
+  def test_record_success(self):
+    response = self.client.record(person='bob', event='fizzed', uri='get')
+    assert response.status == 200
+
+  def test_record_key(self):
+    response = self.client.record(person='bob', event='fizzed', uri='get')
+    data = json.loads(response.data.decode())
+    assert data['args']['_k'] == 'foo'
+
+  def test_record_person(self):
+    response = self.client.record(person='bob', event='fizzed', uri='get')
+    data = json.loads(response.data.decode())
+    assert data['args']['_p'] == 'bob'
+
+  def test_record_event(self):
+    response = self.client.record(person='bob', event='fizzed', uri='get')
+    data = json.loads(response.data.decode())
+    assert data['args']['_n'] == 'fizzed'
+
+  def test_set_success(self):
+    response = self.client.set(person='bob', properties={'cool': 1}, uri='get')
+    assert response.status == 200
+
+  def test_set_key(self):
+    response = self.client.set(person='bob', properties={'cool': 1}, uri='get')
+    data = json.loads(response.data.decode())
+    assert data['args']['_k'] == 'foo'
+
+  def test_set_person(self):
+    response = self.client.set(person='bob', properties={'cool': 1}, uri='get')
+    data = json.loads(response.data.decode())
+    assert data['args']['_p'] == 'bob'
+
+  def test_set_property(self):
+    response = self.client.set(person='bob', properties={'cool': 1}, uri='get')
+    data = json.loads(response.data.decode())
+    assert data['args']['cool'] == '1'
+
+  def test_alias_success(self):
+    response = self.client.alias(person='bob', identity='shadybob', uri='get')
+    assert response.status == 200
+
+  def test_alias_person(self):
+    response = self.client.alias(person='bob', identity='shadybob', uri='get')
+    data = json.loads(response.data.decode())
+    assert data['args']['_n'] == 'shadybob'
+
+
+class KISSmetricsClientCompatIntegrationCase(unittest.TestCase):
+
+  def setUp(self):
+    self.client = KISSmetrics.ClientCompat(key='foo', host='httpbin.org:80')
+
+  def test_record_success(self):
+    self.client.identify('bob')
+    response = self.client.record('fizzed', uri='get', resp=True)
+    assert response.status == 200
+
+  def test_record_key(self):
+    self.client.identify('bob')
+    response = self.client.record('fizzed', uri='get', resp=True)
+    data = json.loads(response.data.decode())
+    assert data['args']['_k'] == 'foo'
+
+  def test_record_person(self):
+    self.client.identify('bob')
+    response = self.client.record('fizzed', uri='get', resp=True)
+    data = json.loads(response.data.decode())
+    assert data['args']['_p'] == 'bob'
+
+  def test_record_event(self):
+    self.client.identify('bob')
+    response = self.client.record('fizzed', uri='get', resp=True)
+    data = json.loads(response.data.decode())
+    assert data['args']['_n'] == 'fizzed'
+
+  def test_set_success(self):
+    self.client.identify('bob')
+    response = self.client.set({'cool': 1}, uri='get', resp=True)
+    assert response.status == 200
+
+  def test_set_key(self):
+    self.client.identify('bob')
+    response = self.client.set({'cool': 1}, uri='get', resp=True)
+    data = json.loads(response.data.decode())
+    assert data['args']['_k'] == 'foo'
+
+  def test_set_person(self):
+    self.client.identify('bob')
+    response = self.client.set({'cool': 1}, uri='get', resp=True)
+    data = json.loads(response.data.decode())
+    assert data['args']['_p'] == 'bob'
+
+  def test_set_property(self):
+    self.client.identify('bob')
+    response = self.client.set({'cool': 1}, uri='get', resp=True)
+    data = json.loads(response.data.decode())
+    assert data['args']['cool'] == '1'
+
+  def test_alias_success(self):
+    self.client.identify('bob')
+    response = self.client.alias('bob', 'shadybob', uri='get', resp=True)
+    assert response.status == 200
+
+  def test_alias_person(self):
+    self.client.identify('bob')
+    response = self.client.alias('bob', 'shadybob', uri='get', resp=True)
+    data = json.loads(response.data.decode())
+    assert data['args']['_n'] == 'shadybob'

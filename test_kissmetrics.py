@@ -4,6 +4,7 @@
 import pytest
 import unittest
 import json
+import datetime
 
 try:
   from urlparse import parse_qs
@@ -38,62 +39,48 @@ class KISSmetricsClientTestCase(unittest.TestCase):
     with pytest.raises(ValueError):
       client = KISSmetrics.Client(key='foo', trk_proto='ssh')
 
-class KISSmetricsClientIntegrationCase(unittest.TestCase):
+class KISSmetricsClientCompatTestCase(unittest.TestCase):
 
   def setUp(self):
-    self.client = KISSmetrics.Client(key='foo', trk_host='httpbin.org')
+    self.client = KISSmetrics.ClientCompat(key='foo')
 
-  def test_record_success(self):
-    response = self.client.record(person='bob', event='fizzed', uri='get')
-    assert response.status == 200
+  def test_compatibility_alias(self):
+    self.client = KISSmetrics.KM('foo')
+    assert self.client.client.key == 'foo'
 
-  def test_record_key(self):
-    response = self.client.record(person='bob', event='fizzed', uri='get')
-    data = json.loads(response.data.decode())
-    assert data['args']['_k'] == 'foo'
+  def test_client_compat_key(self):
+    assert self.client.client.key == 'foo'
 
-  def test_record_person(self):
-    response = self.client.record(person='bob', event='fizzed', uri='get')
-    data = json.loads(response.data.decode())
-    assert data['args']['_p'] == 'bob'
+  def test_client_compat_http_object(self):
+    http = self.client.client.http
+    assert http.request('GET', 'http://httpbin.org').status == 200
 
-  def test_record_event(self):
-    response = self.client.record(person='bob', event='fizzed', uri='get')
-    data = json.loads(response.data.decode())
-    assert data['args']['_n'] == 'fizzed'
+  def test_client_compat_url(self):
+    url = self.client.client.url('e?_k=foo&_p=bar')
+    assert url == "http://trk.kissmetrics.com/e?_k=foo&_p=bar"
 
-  def test_set_success(self):
-    response = self.client.set(person='bob', properties={'cool': 1}, uri='get')
-    assert response.status == 200
+  def test_client_compat_protocol(self):
+    with pytest.raises(ValueError):
+      client = KISSmetrics.ClientCompat(key='foo', host='trk.kissmetrics.com:22') 
 
-  def test_set_key(self):
-    response = self.client.set(person='bob', properties={'cool': 1}, uri='get')
-    data = json.loads(response.data.decode())
-    assert data['args']['_k'] == 'foo'
+  def test_client_compat_log_file(self):
+    assert self.client.log_file() == '/tmp/kissmetrics_error.log'
 
-  def test_set_person(self):
-    response = self.client.set(person='bob', properties={'cool': 1}, uri='get')
-    data = json.loads(response.data.decode())
-    assert data['args']['_p'] == 'bob'
+  def test_client_compat_check_identify(self):
+    with pytest.raises(Exception):
+      client = KISSmetrics.ClientCompat(key='foo')
+      client.reset()
+      client.check_identify()
 
-  def test_set_property(self):
-    response = self.client.set(person='bob', properties={'cool': 1}, uri='get')
-    data = json.loads(response.data.decode())
-    assert data['args']['cool'] == '1'
+  def test_client_compat_check_init(self):
+    with pytest.raises(Exception):
+      client = KISSmetrics.ClientCompat(key='foo')
+      client.reset()
+      client.check_init()
 
-  def test_alias_success(self):
-    response = self.client.alias(person='bob', identity='shadybob', uri='get')
-    assert response.status == 200
-
-  def test_alias_person(self):
-    response = self.client.alias(person='bob', identity='shadybob', uri='get')
-    data = json.loads(response.data.decode())
-    assert data['args']['_p'] == 'bob'
-
-  def test_alias_identity(self):
-    response = self.client.alias(person='bob', identity='shadybob', uri='get')
-    data = json.loads(response.data.decode())
-    assert data['args']['_n'] == 'shadybob'
+  def test_client_compat_now(self):
+    now = datetime.datetime.now()
+    assert now - self.client.now() < datetime.timedelta(seconds=5)
 
 class KISSmetricsRequestTestCase(unittest.TestCase):
 
