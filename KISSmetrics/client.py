@@ -6,9 +6,24 @@ from urllib3 import PoolManager
 
 
 class Client:
-
+    """The client provides operations for reporting occurrences within back-end
+    systems to KISSmetrics via either HTTP or HTTPS. It allows for recording
+    events, setting properties, and aliasing identities.
+    """
     def __init__(self, key, trk_host=KISSmetrics.TRACKING_HOSTNAME,
                  trk_proto=KISSmetrics.TRACKING_PROTOCOL):
+        """Constructs instance given the API `key` for the KISSmetrics product.
+
+        By default, the object will be constructed with `trk_host` set to the
+        Production KISSmetrics tracking service via the `trk_proto`.
+
+        ``key``       - the API key is found on the ``KISSmetrics Settings``
+                        for a product.
+        ``trk_host``  - the URL for all requests, it can be changes from the
+                        default, production value for Tracking service.
+        ``trk_proto`` - the protocol used for requests, it can be set but must
+                        either be HTTP or HTTPS.
+        """
         self.key = key
         self.trk_host = trk_host
         if trk_proto not in ['http', 'https']:
