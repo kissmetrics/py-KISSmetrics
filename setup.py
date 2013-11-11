@@ -42,6 +42,6 @@ setup(name='KISSmetrics',
       url='https://github.com/kissmetrics/py-KISSmetrics/',
       license='MIT',
       packages=['KISSmetrics'],
-      requires=requirements,
+      install_requires=requirements,
       tests_require=test_requirements,
       )
