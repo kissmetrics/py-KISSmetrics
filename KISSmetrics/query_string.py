@@ -15,7 +15,10 @@ except ImportError:
 
 
 def create_query(key, person, event=None, timestamp=None,
-                 identity=None, properties={}):
+                 identity=None, properties=None):
+    if properties is None:
+        properties = {}
+
     params = {KEY_PARAM: key, PERSON_PARAM: person}
     if timestamp:
         params[TIME_FLAG_PARAM] = 1
