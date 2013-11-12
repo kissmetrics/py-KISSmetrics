@@ -14,4 +14,3 @@ __version__ = 'develop'
 from .client import Client
 from .client_compat import ClientCompat
 from .client_compat import ClientCompat as KM
-from .query_string import QueryString
