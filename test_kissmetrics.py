@@ -85,35 +85,35 @@ class KISSmetricsClientCompatTestCase(unittest.TestCase):
 class KISSmetricsRequestTestCase(unittest.TestCase):
 
   def test_minimum(self):
-    request = KISSmetrics.QueryString(key='foo', person='bar')
-    assert parse_qs(request.query_string)['_k'] == ['foo']
-    assert parse_qs(request.query_string)['_p'] == ['bar']
+    query = KISSmetrics.query_string.create_query(key='foo', person='bar')
+    assert parse_qs(query)['_k'] == ['foo']
+    assert parse_qs(query)['_p'] == ['bar']
 
   def test_event(self):
-    request = KISSmetrics.QueryString(key='foo', person='bar', event='fizzed')
-    assert parse_qs(request.query_string)['_k'] == ['foo']
-    assert parse_qs(request.query_string)['_p'] == ['bar']
-    assert parse_qs(request.query_string)['_n'] == ['fizzed']
+    query = KISSmetrics.query_string.create_query(key='foo', person='bar', event='fizzed')
+    assert parse_qs(query)['_k'] == ['foo']
+    assert parse_qs(query)['_p'] == ['bar']
+    assert parse_qs(query)['_n'] == ['fizzed']
 
   def test_set(self):
     properties = {'cool': '1'}
-    request = KISSmetrics.QueryString(key='foo', person='bar', properties=properties)
-    assert parse_qs(request.query_string)['_k'] == ['foo']
-    assert parse_qs(request.query_string)['_p'] == ['bar']
-    assert parse_qs(request.query_string)['cool'] == ['1']
+    query = KISSmetrics.query_string.create_query(key='foo', person='bar', properties=properties)
+    assert parse_qs(query)['_k'] == ['foo']
+    assert parse_qs(query)['_p'] == ['bar']
+    assert parse_qs(query)['cool'] == ['1']
 
   def test_alias(self):
-    request = KISSmetrics.QueryString(key='foo', person='bar', identity='baz')
-    assert parse_qs(request.query_string)['_k'] == ['foo']
-    assert parse_qs(request.query_string)['_p'] == ['bar']
-    assert parse_qs(request.query_string)['_n'] == ['baz']
+    query = KISSmetrics.query_string.create_query(key='foo', person='bar', identity='baz')
+    assert parse_qs(query)['_k'] == ['foo']
+    assert parse_qs(query)['_p'] == ['bar']
+    assert parse_qs(query)['_n'] == ['baz']
 
   def test_timestamp(self):
-    request = KISSmetrics.QueryString(key='foo', person='bar', timestamp=1381849312)
-    assert parse_qs(request.query_string)['_k'] == ['foo']
-    assert parse_qs(request.query_string)['_p'] == ['bar']
-    assert parse_qs(request.query_string)['_d'] == ['1']
-    assert parse_qs(request.query_string)['_t'] == ['1381849312']
+    query = KISSmetrics.query_string.create_query(key='foo', person='bar', timestamp=1381849312)
+    assert parse_qs(query)['_k'] == ['foo']
+    assert parse_qs(query)['_p'] == ['bar']
+    assert parse_qs(query)['_d'] == ['1']
+    assert parse_qs(query)['_t'] == ['1381849312']
 
 class KISSmetricsRequestFunctionsTestCase(unittest.TestCase):
 
