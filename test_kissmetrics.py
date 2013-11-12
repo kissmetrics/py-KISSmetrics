@@ -32,7 +32,7 @@ class KISSmetricsClientTestCase(unittest.TestCase):
     assert http.request('GET', 'http://httpbin.org').status == 200
 
   def test_client_url(self):
-    url = self.client.url('e?_k=foo&_p=bar')
+    url = self.client.url % ('http', 'trk.kissmetrics.com', 'e?_k=foo&_p=bar')
     assert url == "http://trk.kissmetrics.com/e?_k=foo&_p=bar"
 
   def test_client_protocol(self):
@@ -56,7 +56,7 @@ class KISSmetricsClientCompatTestCase(unittest.TestCase):
     assert http.request('GET', 'http://httpbin.org').status == 200
 
   def test_client_compat_url(self):
-    url = self.client.client.url('e?_k=foo&_p=bar')
+    url = self.client.client.url % ('http', 'trk.kissmetrics.com', 'e?_k=foo&_p=bar')
     assert url == "http://trk.kissmetrics.com/e?_k=foo&_p=bar"
 
   def test_client_compat_protocol(self):
