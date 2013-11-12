@@ -27,6 +27,5 @@ def create_query(key, person, event=None, timestamp=None,
         params[EVENT_NAME_PARAM] = event
     if identity:
         params[ALIAS_PARAM] = identity
-    for key, value in properties.items():
-        params[key] = value
+    params.update(properties)
     return urlencode(params)
