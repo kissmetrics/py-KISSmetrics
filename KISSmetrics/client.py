@@ -15,10 +15,9 @@ class Client:
         self.http = PoolManager()
         self.trk_host = trk_host
         self.trk_proto = trk_proto
-        self.url = '%s://%s/%s'
 
     def request(self, query, method="GET"):
-        url = self.url % (self.trk_proto, self.trk_host, query)
+        url = '%s://%s/%s' % (self.trk_proto, self.trk_host, query)
         return self.http.request(method, url)
 
     def record(self, person, event, properties=None, timestamp=None,
