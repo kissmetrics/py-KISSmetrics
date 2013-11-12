@@ -6,11 +6,8 @@ from urllib3 import PoolManager
 
 
 class Client:
-    """provides operations for reporting occurrences within back-end
-    systems to KISSmetrics via either HTTP or HTTPS. It allows for
-    recording events, setting properties, and aliasing identities.
+    """Provides an interface to KISSmetrics tracking service."""
 
-    """
     def __init__(self, key, trk_host=KISSmetrics.TRACKING_HOSTNAME,
                  trk_proto=KISSmetrics.TRACKING_PROTOCOL):
         """Constructs instance given the API `key` for the KISSmetrics
@@ -22,8 +19,8 @@ class Client:
 
         :param trk_host: tracking URL for all requests; defaults
                          production tracking service.
-        :param trk_proto: the protocol for requests; either be HTTP or
-                          HTTPS.
+        :param trk_proto: the protocol for requests; either be `'http'`
+                          or `'https'`.
 
         """
         self.key = key
@@ -34,16 +31,6 @@ class Client:
         self.http = PoolManager()
 
     def url(self, query_string):
-        """Handles formating the URL requests.
-
-        :param query_string: the key-value pairs to include
-        :type query_string: dict
-
-        :returns: a formatted, valid URL given the protocol, host &
-                  query string
-        :rtype: str
-
-        """
         return '%s://%s/%s' % (self.trk_proto, self.trk_host, query_string)
 
     def record(self, person, event, properties={}, timestamp=None,
@@ -91,12 +78,7 @@ class Client:
         return self.http.request('GET', url)
 
     def alias(self, person, identity, uri=KISSmetrics.ALIAS_URI):
-        """Creates a mapping from ``person`` to ``identity`` such actions
-        done by either are resolved to the same person.
-
-        Note the direction of the mapping is ``person`` to ``identity``
-        (so ``person`` is also known as ``identity`` or ``person`` =>
-        ``identity`` when looking at it as "source => target")
+        """Maps `person` to `identity`; actions done by one resolve the other.
 
         :param person: consider as same individual ``identity``; the
                        source of the alias operation
@@ -110,14 +92,18 @@ class Client:
         :returns: an HTTP response for the request
         :rtype: `urllib3.response.HTTPResponse`
 
-        Aliasing is not a reversible operation.  When aliasing to an
-        identity, take care not to use a session identifier or any other
-        value that is not relatively stable (a value that will not
-        change per request or per session).
+        Note the direction of the mapping is ``person`` to ``identity``
+        (so ``person`` is also known as ``identity`` or ``person`` =>
+        ``identity`` when looking at it as "source => target")
 
         When consulting the Aliasing documentation, `person` corresponds
         to ``query_string.PERSON_PARAM`` and `identity` corresponds to
         ``query_string.ALIAS_PARAM``.
+
+        Aliasing is not a reversible operation.  When aliasing to an
+        identity, take care not to use a session identifier or any other
+        value that is not relatively stable (a value that will not
+        change per request or per session).
 
         For more information see the API Specifications on `Aliasing
         <http://support.kissmetrics.com/apis/specifications.html#aliasing-users>`_.
