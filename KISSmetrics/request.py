@@ -3,20 +3,30 @@
 import KISSmetrics
 from KISSmetrics.query_string import create_query
 
+def _request(scheme, host, path, query):
+    return '%s://%s/%s?%s' % (scheme, host, path, query)
 
 def record(key, person, event, timestamp=None, properties=None,
-           uri=KISSmetrics.RECORD_URI):
+           scheme=KISSmetrics.TRACKING_SCHEME,
+           host=KISSmetrics.TRACKING_HOSTNAME,
+           path=KISSmetrics.RECORD_PATH):
     query = create_query(key, person, event=event, timestamp=timestamp,
                          properties=properties)
-    return '%s?%s' % (uri, query)
+    return _request(scheme, host, path, query)
 
 
-def set(key, person, timestamp=None, properties=None, uri=KISSmetrics.SET_URI):
+def set(key, person, timestamp=None, properties=None,
+        scheme=KISSmetrics.TRACKING_SCHEME,
+        host=KISSmetrics.TRACKING_HOSTNAME,
+        path=KISSmetrics.SET_PATH):
     query = create_query(key, person, timestamp=timestamp,
                          properties=properties)
-    return '%s?%s' % (uri, query)
+    return _request(scheme, host, path, query)
 
 
-def alias(key, person, identity, uri=KISSmetrics.ALIAS_URI):
+def alias(key, person, identity,
+          scheme=KISSmetrics.TRACKING_SCHEME,
+          host=KISSmetrics.TRACKING_HOSTNAME,
+          path=KISSmetrics.ALIAS_PATH):
     query = create_query(key, person, identity=identity)
-    return '%s?%s' % (uri, query)
+    return _request(scheme, host, path, query)
