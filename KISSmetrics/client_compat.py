@@ -7,7 +7,7 @@ import datetime
 port_map = {'80': 'http', '443': 'https'}
 
 
-class ClientCompat:
+class ClientCompat(object):
 
     def __init__(self, key, host=None, http_timeout=None, logging=True):
         self.key = key

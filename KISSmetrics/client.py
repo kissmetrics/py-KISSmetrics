@@ -3,7 +3,7 @@ from KISSmetrics import request
 from urllib3 import PoolManager
 
 
-class Client:
+class Client(object):
 
     def __init__(self, key, trk_host=KISSmetrics.TRACKING_HOSTNAME,
                  trk_proto=KISSmetrics.TRACKING_PROTOCOL):
