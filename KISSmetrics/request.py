@@ -15,7 +15,8 @@ def record(key, person, event, timestamp=None, properties=None,
            path=KISSmetrics.RECORD_PATH):
     query = create_query(key, person, event=event, timestamp=timestamp,
                          properties=properties)
-    split = SplitResult(scheme, host, path, query, None)
+    split = SplitResult(scheme=scheme, netloc=host, path=path, query=query,
+                        fragment=None)
     return urlunsplit(split)
 
 
@@ -25,7 +26,8 @@ def set(key, person, timestamp=None, properties=None,
         path=KISSmetrics.SET_PATH):
     query = create_query(key, person, timestamp=timestamp,
                          properties=properties)
-    split = SplitResult(scheme, host, path, query, None)
+    split = SplitResult(scheme=scheme, netloc=host, path=path, query=query,
+                        fragment=None)
     return urlunsplit(split)
 
 
@@ -34,5 +36,6 @@ def alias(key, person, identity,
           host=KISSmetrics.TRACKING_HOSTNAME,
           path=KISSmetrics.ALIAS_PATH):
     query = create_query(key, person, identity=identity)
-    split = SplitResult(scheme, host, path, query, None)
+    split = SplitResult(scheme=scheme, netloc=host, path=path, query=query,
+                        fragment=None)
     return urlunsplit(split)
