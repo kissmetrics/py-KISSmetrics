@@ -17,6 +17,7 @@ class ClientCompat:
 
         Interface only exists for compatibility and will not be supported
         in the future.
+
     """
 
     def __init__(self, key, host=None, http_timeout=None, logging=True):
@@ -30,6 +31,7 @@ class ClientCompat:
         :param http_timeout: request timeout; defaults to None
         :type http_timeout: int
         :param logging: indicate whether to log
+
         """
         self.key = key
         if host:
@@ -127,6 +129,7 @@ class ClientCompat:
         .. note::
 
             Will log to ``'/tmp/kissmetrics_error.log'``; cannot be modified.
+
         """
         return '/tmp/kissmetrics_error.log'
 
@@ -138,6 +141,7 @@ class ClientCompat:
             After calling this method, further calls to `record`, `set`, &
             `alias` will raise an `Exception`. You will need to set the API
             key again via `key` attribute and call `identify`.
+
         """
         self.identity = None
         self.key = None
