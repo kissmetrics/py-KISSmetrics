@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 TRACKING_HOSTNAME = 'trk.kissmetrics.com'
-TRACKING_PROTOCOL = 'http'
+TRACKING_SCHEME = 'http'
 
-RECORD_URI = 'e'
-SET_URI = 's'
-ALIAS_URI = 'a'
+RECORD_PATH = 'e'
+SET_PATH = 's'
+ALIAS_PATH = 'a'
 
 __author__ = 'Ernest W. Durbin III <ewdurbin@gmail.com>'
 __license__ = 'MIT'
