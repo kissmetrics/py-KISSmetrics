@@ -3,14 +3,14 @@ import json
 import datetime
 
 try:
-  from urlparse import parse_qs
+    from urlparse import parse_qs
 except:
-  from urllib.parse import parse_qs
+    from urllib.parse import parse_qs
 
 try:
-  from urlparse import urlparse
+    from urlparse import urlparse
 except ImportError:
-  from urllib.parse import urlparse
+    from urllib.parse import urlparse
 
 import KISSmetrics
 
