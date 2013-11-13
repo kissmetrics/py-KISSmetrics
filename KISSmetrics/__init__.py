@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 TRACKING_HOSTNAME = 'trk.kissmetrics.com'
-TRACKING_PROTOCOL = 'http'
+TRACKING_SCHEME = 'http'
 
 RECORD_PATH = 'e'
 SET_PATH = 's'

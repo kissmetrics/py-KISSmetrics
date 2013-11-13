@@ -16,13 +16,13 @@ class ClientCompat(object):
         if host:
             (trk_host, trk_port) = host.split(':')
             try:
-                trk_proto = port_map[trk_port]
+                trk_scheme = port_map[trk_port]
             except KeyError:
                 raise ValueError('port in supplied host is not 80 or 443')
         else:
             trk_host = KISSmetrics.TRACKING_HOSTNAME
-            trk_proto = 'http'
-        self.client = Client(key=key, trk_host=trk_host, trk_proto=trk_proto)
+            trk_scheme = 'http'
+        self.client = Client(key=key, trk_host=trk_host, trk_scheme=trk_scheme)
         self.identity = None
 
     def identify(self, identity):
