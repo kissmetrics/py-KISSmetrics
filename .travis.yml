@@ -12,6 +12,6 @@ install:
   - pip install coveralls --use-mirrors
 # command to run tests
 script:
-  - py.test tests --cov KISSmetrics/
+  - py.test --cov KISSmetrics tests/
 after_success:
   - coveralls
