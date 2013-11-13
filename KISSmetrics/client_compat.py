@@ -29,7 +29,7 @@ class ClientCompat:
     def identify(self, identity):
         self.identity = identity
 
-    def record(self, action, props=None, uri=KISSmetrics.RECORD_URI,
+    def record(self, action, props=None, path=KISSmetrics.RECORD_PATH,
                resp=False):
         self.check_id_key()
         timestamp = None
@@ -37,21 +37,21 @@ class ClientCompat:
             props = {}
         response = self.client.record(person=self.identity, event=action,
                                       properties=props, timestamp=timestamp,
-                                      uri=uri)
+                                      path=path)
         if resp:
             return response
 
-    def set(self, data, uri=KISSmetrics.SET_URI, resp=False):
+    def set(self, data, path=KISSmetrics.SET_PATH, resp=False):
         self.check_id_key()
         timestamp = None
         response = self.client.set(person=self.identity, properties=data,
-                                   timestamp=timestamp, uri=uri)
+                                   timestamp=timestamp, path=path)
         if resp:
             return response
 
-    def alias(self, name, alias_to, uri=KISSmetrics.ALIAS_URI, resp=False):
+    def alias(self, name, alias_to, path=KISSmetrics.ALIAS_PATH, resp=False):
         self.check_init()
-        response = self.client.alias(person=name, identity=alias_to, uri=uri)
+        response = self.client.alias(person=name, identity=alias_to, path=path)
         if resp:
             return response
 

@@ -126,8 +126,8 @@ class KISSmetricsRequestFunctionsTestCase(unittest.TestCase):
     assert parse_qs(query_string)['_d'] == ['1']
     assert parse_qs(query_string)['_t'] == ['1381849312']
 
-  def test_record_custom_uri(self):
-    query_string = KISSmetrics.request.record(key='foo', person='bar', event='fizzed', uri='get')
+  def test_record_custom_path(self):
+    query_string = KISSmetrics.request.record(key='foo', person='bar', event='fizzed', path='get')
     assert urlparse(query_string).path == 'get'
     query_string = urlparse(query_string).query
     assert parse_qs(query_string)['_k'] == ['foo']
@@ -154,9 +154,9 @@ class KISSmetricsRequestFunctionsTestCase(unittest.TestCase):
     assert parse_qs(query_string)['_t'] == ['1381849312']
     assert parse_qs(query_string)['cool'] == ['1']
 
-  def test_set_custom_uri(self):
+  def test_set_custom_path(self):
     properties = {'cool': '1'}
-    query_string = KISSmetrics.request.set(key='foo', person='bar', properties=properties, uri='get')
+    query_string = KISSmetrics.request.set(key='foo', person='bar', properties=properties, path='get')
     assert urlparse(query_string).path == 'get'
     query_string = urlparse(query_string).query
     assert parse_qs(query_string)['_k'] == ['foo']
@@ -171,8 +171,8 @@ class KISSmetricsRequestFunctionsTestCase(unittest.TestCase):
     assert parse_qs(query_string)['_p'] == ['bar']
     assert parse_qs(query_string)['_n'] == ['baz']
 
-  def test_alias_custom_uri(self):
-    query_string = KISSmetrics.request.alias(key='foo', person='bar', identity='baz', uri='get')
+  def test_alias_custom_path(self):
+    query_string = KISSmetrics.request.alias(key='foo', person='bar', identity='baz', path='get')
     assert urlparse(query_string).path == 'get'
     query_string = urlparse(query_string).query
     assert parse_qs(query_string)['_k'] == ['foo']

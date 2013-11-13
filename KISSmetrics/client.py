@@ -21,18 +21,18 @@ class Client:
         return self.http.request(method, url)
 
     def record(self, person, event, properties=None, timestamp=None,
-               uri=KISSmetrics.RECORD_URI):
+               path=KISSmetrics.RECORD_PATH):
         this_request = request.record(self.key, person, event,
                                       timestamp=timestamp,
-                                      properties=properties, uri=uri)
+                                      properties=properties, path=path)
         return self.request(this_request)
 
     def set(self, person, properties=None, timestamp=None,
-            uri=KISSmetrics.SET_URI):
+            path=KISSmetrics.SET_PATH):
         this_request = request.set(self.key, person, timestamp=timestamp,
-                                   properties=properties, uri=uri)
+                                   properties=properties, path=path)
         return self.request(this_request)
 
-    def alias(self, person, identity, uri=KISSmetrics.ALIAS_URI):
-        this_request = request.alias(self.key, person, identity, uri=uri)
+    def alias(self, person, identity, path=KISSmetrics.ALIAS_PATH):
+        this_request = request.alias(self.key, person, identity, path=path)
         return self.request(this_request)
