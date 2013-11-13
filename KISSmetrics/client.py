@@ -15,7 +15,6 @@ class Client:
         :param key: API key for product, found on the
                     "KISSmetrics Settings".
         :type key: str
-
         :param trk_host: tracking host for requests; defaults
                          production tracking service.
         :param trk_proto: the protocol for requests; either be `'http'`
