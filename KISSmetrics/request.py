@@ -3,8 +3,10 @@
 import KISSmetrics
 from KISSmetrics.query_string import create_query
 
+
 def _request(scheme, host, path, query):
     return '%s://%s/%s?%s' % (scheme, host, path, query)
+
 
 def record(key, person, event, timestamp=None, properties=None,
            scheme=KISSmetrics.TRACKING_SCHEME,

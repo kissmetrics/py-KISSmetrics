@@ -31,11 +31,13 @@ class Client:
     def set(self, person, properties=None, timestamp=None,
             path=KISSmetrics.SET_PATH):
         this_request = request.set(self.key, person, timestamp=timestamp,
-                                   properties=properties, scheme=self.trk_scheme,
-                                   host=self.trk_host, path=path)
+                                   properties=properties,
+                                   scheme=self.trk_scheme, host=self.trk_host,
+                                   path=path)
         return self.request(this_request)
 
     def alias(self, person, identity, path=KISSmetrics.ALIAS_PATH):
-        this_request = request.alias(self.key, person, identity, scheme=self.trk_scheme,
+        this_request = request.alias(self.key, person, identity,
+                                     scheme=self.trk_scheme,
                                      host=self.trk_host, path=path)
         return self.request(this_request)
