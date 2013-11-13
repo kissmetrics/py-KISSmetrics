@@ -20,13 +20,14 @@ Support for:
 >>> import KISSmetrics
 >>> KM = KISSmetrics.Client(key='mySuperSecretApiKey')
 >>> KM.record('bob@bob.com', 'Viewed Homepage')
-<urllib3.response.HTTPResponse object at 0x109f2c890>
+<urllib3.response.HTTPResponse object at 0x...>
 >>> KM.record('bob@bob.com', 'Signed Up', {'Plan' : 'Pro', 'Amount' : 99.95})
-<urllib3.response.HTTPResponse object at 0x109f2ca50>
+<urllib3.response.HTTPResponse object at 0x...>
 >>> KM.record('bob@bob.com', 'Signed Up', timestamp=1234567890)
-<urllib3.response.HTTPResponse object at 0x109f2c910>
+<urllib3.response.HTTPResponse object at 0x...>
 >>> KM.set('bob@bob.com', {'gender': 'male'})
-<urllib3.response.HTTPResponse object at 0x109f2c750>
+<urllib3.response.HTTPResponse object at 0x...>
+
 ```
 
 ## Compatibility client
@@ -40,11 +41,17 @@ This interface is provided for compatibility only, and will not be supported in 
 ```
 >>> from KISSmetrics import KM
 >>> km = KM("this is your API key")
+>>> km.key
+'this is your API key'
 >>> km.identify('bob@bob.com')
+>>> km.identity
+'bob@bob.com'
+>>> km.check_id_key() # this will throw exception if key or identity is None
 >>> km.record('Viewed Homepage')
 >>> km.record('Signed Up', {'Plan' : 'Pro', 'Amount' : 99.95})
 >>> km.record('Signed Up', {'_d' : 1, '_t' : 1234567890})
 >>> km.set({'gender' : 'male'})
+
 ```
 
 ## Development setup
