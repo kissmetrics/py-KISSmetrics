@@ -12,11 +12,11 @@ class Client:
                  trk_scheme=KISSmetrics.TRACKING_SCHEME):
         """Initialize client for use with KISSmetrics API key.
 
-        :param key: the API key is found on the "KISSmetrics Settings"
-                    for a product.
+        :param key: API key for a product, found on the
+                    "KISSmetrics Settings".
         :type key: str
 
-        :param trk_host: tracking URL for all requests; defaults
+        :param trk_host: tracking host for requests; defaults
                          production tracking service.
         :param trk_proto: the protocol for requests; either be `'http'`
                           or `'https'`.
@@ -60,8 +60,8 @@ class Client:
             uri=KISSmetrics.SET_PATH):
         """Set a property (or properties) for a `person`.
 
-        :param person: the individual to associated properties with
-        :param properties: key-value pairs to associated with `person`
+        :param person: individual to associate properties with
+        :param properties: key-value pairs to associate with `person`
         :type properties: dict
         :param timestamp: when the `event` was performed; optional for
                           back-dating
@@ -79,7 +79,7 @@ class Client:
         return self.request(this_request)
 
     def alias(self, person, identity, path=KISSmetrics.ALIAS_PATH):
-        """Map `person` to `identity`; actions done by one resolve the other.
+        """Map `person` to `identity`; actions done by one resolve to other.
 
         :param person: consider as same individual ``identity``; the
                        source of the alias operation
