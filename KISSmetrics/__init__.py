@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 TRACKING_HOSTNAME = 'trk.kissmetrics.com'
 TRACKING_PROTOCOL = 'http'
 

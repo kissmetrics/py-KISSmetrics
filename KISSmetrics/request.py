@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import KISSmetrics
 from KISSmetrics.query_string import create_query
 
