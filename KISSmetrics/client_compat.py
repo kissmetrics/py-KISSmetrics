@@ -144,11 +144,11 @@ class ClientCompat:
 
     def check_identify(self):
         if self.identity is None:
-            raise Exception('Need to identify first: KM.identify(<user>)')
+            raise Exception('Need to identify first (KM.identify <user>)')
 
     def check_init(self):
         if self.key is None:
-            raise Exception('Need to initialize first: KM(<your_key>)')
+            raise Exception('Need to initialize first (KM.init <your_key>)')
 
     def now(self):
         return datetime.datetime.utcnow()
