@@ -16,7 +16,7 @@ except ImportError:
 
 def create_query(key, person, event=None, timestamp=None,
                  identity=None, properties=None):
-    """Build and encode query string
+    """Build and encode query string.
 
     :param key: API key for product, found on the
                 "KISSmetrics Settings".

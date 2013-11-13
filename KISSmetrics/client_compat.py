@@ -45,7 +45,7 @@ class ClientCompat:
         self.identity = None
 
     def identify(self, identity):
-        """Define identity for subsequent calls
+        """Define identity for subsequent calls.
 
         :param identity: identifying info (email, user-id, anonymous-id)
         :type identity: str or unicode
@@ -131,7 +131,7 @@ class ClientCompat:
         return '/tmp/kissmetrics_error.log'
 
     def reset(self):
-        """Reset `identity` and `key` attributes
+        """Reset `identity` and `key` attributes.
 
         .. warning::
 
