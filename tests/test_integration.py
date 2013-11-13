@@ -1,12 +1,16 @@
-import pytest
+if __name__ == '__main__':
+    import os, sys
+    sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/..'))
+
+import unittest
 import json
 
 import KISSmetrics
 
 
-class TestKISSmetricsClientIntegration(object):
+class KISSmetricsClientIntegrationTestCase(unittest.TestCase):
 
-    def setup(self):
+    def setUp(self):
         self.client = KISSmetrics.Client(key='foo', trk_host='httpbin.org')
 
     def test_record_success(self):
@@ -57,9 +61,9 @@ class TestKISSmetricsClientIntegration(object):
         assert data['args']['_n'] == 'shadybob'
 
 
-class TestKISSmetricsClientCompatIntegration(object):
+class KISSmetricsClientCompatIntegrationTestCase(unittest.TestCase):
 
-    def setup(self):
+    def setUp(self):
         self.client = KISSmetrics.ClientCompat(key='foo', host='httpbin.org:80')
 
     def test_record_success(self):
@@ -118,3 +122,7 @@ class TestKISSmetricsClientCompatIntegration(object):
         response = self.client.alias('bob', 'shadybob', path='get', resp=True)
         data = json.loads(response.data.decode())
         assert data['args']['_n'] == 'shadybob'
+
+
+if __name__ == '__main__':
+    unittest.main()
