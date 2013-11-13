@@ -35,6 +35,7 @@ def create_query(key, person, event=None, timestamp=None,
 
         When a ``timestamp`` is provided, the ``TIME_FLAG_KEY`` will
         be set to ``1`` and included.
+
     """
     if properties is None:
         properties = {}
