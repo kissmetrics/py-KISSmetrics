@@ -3,9 +3,10 @@
 import KISSmetrics
 from KISSmetrics.query_string import create_query
 
-
-def _request(scheme, host, path, query):
-    return '%s://%s/%s?%s' % (scheme, host, path, query)
+try:
+    from urlparse import urlunsplit, SplitResult
+except ImportError:
+    from urllib.parse import urlunsplit, SplitResult
 
 
 def record(key, person, event, timestamp=None, properties=None,
@@ -14,7 +15,8 @@ def record(key, person, event, timestamp=None, properties=None,
            path=KISSmetrics.RECORD_PATH):
     query = create_query(key, person, event=event, timestamp=timestamp,
                          properties=properties)
-    return _request(scheme, host, path, query)
+    split = SplitResult(scheme, host, path, query, None)
+    return urlunsplit(split)
 
 
 def set(key, person, timestamp=None, properties=None,
@@ -23,7 +25,8 @@ def set(key, person, timestamp=None, properties=None,
         path=KISSmetrics.SET_PATH):
     query = create_query(key, person, timestamp=timestamp,
                          properties=properties)
-    return _request(scheme, host, path, query)
+    split = SplitResult(scheme, host, path, query, None)
+    return urlunsplit(split)
 
 
 def alias(key, person, identity,
@@ -31,4 +34,5 @@ def alias(key, person, identity,
           host=KISSmetrics.TRACKING_HOSTNAME,
           path=KISSmetrics.ALIAS_PATH):
     query = create_query(key, person, identity=identity)
-    return _request(scheme, host, path, query)
+    split = SplitResult(scheme, host, path, query, None)
+    return urlunsplit(split)
