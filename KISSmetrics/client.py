@@ -91,8 +91,8 @@ class Client:
         :rtype: `urllib3.response.HTTPResponse`
 
         Note the direction of the mapping is ``person`` to ``identity``
-        (so ``person`` is also known as ``identity`` or ``person`` =>
-        ``identity`` when looking at it as "source => target")
+        (so "``person`` is also known as ``identity``" or "``person`` =>
+        ``identity``" when looking at it as "``<source>`` => ``<target>``")
 
         When consulting the Aliasing documentation, `person` corresponds
         to ``query_string.PERSON_PARAM`` and `identity` corresponds to
