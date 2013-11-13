@@ -63,5 +63,5 @@ virtualenv env
 source env/bin/activate
 pip install -r requirements.txt
 pip install -r test-requirements.txt
-py.test --cov KISSmetrics/ test_*.py
+py.test --cov KISSmetrics/ tests/
 ```
