@@ -6,12 +6,11 @@ from urllib3 import PoolManager
 
 
 class Client:
-    """Provides an interface to KISSmetrics tracking service."""
+    """Interface to KISSmetrics tracking service."""
 
     def __init__(self, key, trk_host=KISSmetrics.TRACKING_HOSTNAME,
                  trk_proto=KISSmetrics.TRACKING_PROTOCOL):
-        """Constructs instance given the API `key` for the KISSmetrics
-        product.
+        """Initialize client for use with KISSmetrics API key.
 
         :param key: the API key is found on the "KISSmetrics Settings"
                     for a product.
