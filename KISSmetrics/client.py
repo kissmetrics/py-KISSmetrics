@@ -12,7 +12,7 @@ class Client:
                  trk_scheme=KISSmetrics.TRACKING_SCHEME):
         """Initialize client for use with KISSmetrics API key.
 
-        :param key: API key for a product, found on the
+        :param key: API key for product, found on the
                     "KISSmetrics Settings".
         :type key: str
 
