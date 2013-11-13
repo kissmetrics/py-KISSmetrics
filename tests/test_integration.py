@@ -1,13 +1,12 @@
 import pytest
-import unittest
 import json
 
 import KISSmetrics
 
 
-class KISSmetricsClientIntegrationCase(unittest.TestCase):
+class TestKISSmetricsClientIntegration(object):
 
-  def setUp(self):
+  def setup(self):
     self.client = KISSmetrics.Client(key='foo', trk_host='httpbin.org')
 
   def test_record_success(self):
@@ -58,9 +57,9 @@ class KISSmetricsClientIntegrationCase(unittest.TestCase):
     assert data['args']['_n'] == 'shadybob'
 
 
-class KISSmetricsClientCompatIntegrationCase(unittest.TestCase):
+class TestKISSmetricsClientCompatIntegration(object):
 
-  def setUp(self):
+  def setup(self):
     self.client = KISSmetrics.ClientCompat(key='foo', host='httpbin.org:80')
 
   def test_record_success(self):

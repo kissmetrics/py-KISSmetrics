@@ -1,5 +1,4 @@
 import pytest
-import unittest
 import json
 import datetime
 
@@ -16,9 +15,9 @@ except ImportError:
 import KISSmetrics
 
 
-class KISSmetricsClientTestCase(unittest.TestCase):
+class TestKISSmetricsClient(object):
 
-  def setUp(self):
+  def setup(self):
     self.client = KISSmetrics.Client(key='foo')
 
   def test_client_key(self):
@@ -32,9 +31,9 @@ class KISSmetricsClientTestCase(unittest.TestCase):
     with pytest.raises(ValueError):
       client = KISSmetrics.Client(key='foo', trk_proto='ssh')
 
-class KISSmetricsClientCompatTestCase(unittest.TestCase):
+class TestKISSmetricsClientCompat(object):
 
-  def setUp(self):
+  def setup(self):
     self.client = KISSmetrics.ClientCompat(key='foo')
 
   def test_compatibility_alias(self):
@@ -71,7 +70,7 @@ class KISSmetricsClientCompatTestCase(unittest.TestCase):
     now = datetime.datetime.now()
     assert now - self.client.now() < datetime.timedelta(seconds=5)
 
-class KISSmetricsRequestTestCase(unittest.TestCase):
+class TestKISSmetricsRequest(object):
 
   def test_minimum(self):
     query = KISSmetrics.query_string.create_query(key='foo', person='bar')
@@ -104,7 +103,7 @@ class KISSmetricsRequestTestCase(unittest.TestCase):
     assert parse_qs(query)['_d'] == ['1']
     assert parse_qs(query)['_t'] == ['1381849312']
 
-class KISSmetricsRequestFunctionsTestCase(unittest.TestCase):
+class TestKISSmetricsRequestFunctions(object):
 
   def test_record(self):
     query_string = KISSmetrics.request.record(key='foo', person='bar', event='fizzed')
