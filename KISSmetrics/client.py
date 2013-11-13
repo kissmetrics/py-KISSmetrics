@@ -10,7 +10,7 @@ class Client:
     def __init__(self, key, trk_host=KISSmetrics.TRACKING_HOSTNAME,
                  trk_proto=KISSmetrics.TRACKING_PROTOCOL):
         self.key = key
-        if trk_proto not in ['http', 'https']:
+        if trk_proto not in ('http', 'https'):
             raise ValueError('trk_proto must be one of (http, https)')
         self.http = PoolManager()
         self.trk_host = trk_host
