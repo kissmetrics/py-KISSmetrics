@@ -35,7 +35,7 @@ class Client:
 
     def record(self, person, event, properties=None, timestamp=None,
                uri=KISSmetrics.RECORD_URI):
-        """Records `event` for `person` with any `properties`.
+        """Record `event` for `person` with any `properties`.
 
         :param person: the individual performing the `event`
         :param event: the `event` name that was performed
@@ -57,7 +57,7 @@ class Client:
 
     def set(self, person, properties=None, timestamp=None,
             uri=KISSmetrics.SET_URI):
-        """Sets a property (or properties) for a `person`.
+        """Set a property (or properties) for a `person`.
 
         :param person: the individual to associated properties with
         :param properties: key-value pairs to associated with `person`
@@ -76,7 +76,7 @@ class Client:
         return self.request(this_request)
 
     def alias(self, person, identity, uri=KISSmetrics.ALIAS_URI):
-        """Maps `person` to `identity`; actions done by one resolve the other.
+        """Map `person` to `identity`; actions done by one resolve the other.
 
         :param person: consider as same individual ``identity``; the
                        source of the alias operation
