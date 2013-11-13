@@ -9,7 +9,7 @@ class Client:
     """Interface to KISSmetrics tracking service"""
 
     def __init__(self, key, trk_host=KISSmetrics.TRACKING_HOSTNAME,
-                 trk_proto=KISSmetrics.TRACKING_PROTOCOL):
+                 trk_scheme=KISSmetrics.TRACKING_SCHEME):
         """Initialize client for use with KISSmetrics API key.
 
         :param key: the API key is found on the "KISSmetrics Settings"
@@ -23,18 +23,17 @@ class Client:
 
         """
         self.key = key
-        if trk_proto not in ['http', 'https']:
-            raise ValueError('trk_proto must be one of (http, https)')
+        if trk_scheme not in ['http', 'https']:
+            raise ValueError('trk_scheme must be one of (http, https)')
         self.http = PoolManager()
         self.trk_host = trk_host
-        self.trk_proto = trk_proto
+        self.trk_scheme = trk_scheme
 
-    def request(self, query, method="GET"):
-        url = '%s://%s/%s' % (self.trk_proto, self.trk_host, query)
-        return self.http.request(method, url)
+    def request(self, uri, method="GET"):
+        return self.http.request(method, uri)
 
     def record(self, person, event, properties=None, timestamp=None,
-               uri=KISSmetrics.RECORD_URI):
+               path=KISSmetrics.RECORD_PATH):
         """Record `event` for `person` with any `properties`.
 
         :param person: the individual performing the `event`
@@ -44,7 +43,7 @@ class Client:
         :param timestamp: when the `event` was performed; optional for
                           back-dating
         :param uri: HTTP endpoint to use; defaults to
-                    ``KISSmetrics.RECORD_URI``
+                    ``KISSmetrics.RECORD_PATH``
 
         :returns: an HTTP response for the request
         :rtype: `urllib3.response.HTTPResponse`
@@ -52,11 +51,13 @@ class Client:
         """
         this_request = request.record(self.key, person, event,
                                       timestamp=timestamp,
-                                      properties=properties, uri=uri)
+                                      properties=properties,
+                                      scheme=self.trk_scheme,
+                                      host=self.trk_host, path=path)
         return self.request(this_request)
 
     def set(self, person, properties=None, timestamp=None,
-            uri=KISSmetrics.SET_URI):
+            uri=KISSmetrics.SET_PATH):
         """Set a property (or properties) for a `person`.
 
         :param person: the individual to associated properties with
@@ -65,17 +66,19 @@ class Client:
         :param timestamp: when the `event` was performed; optional for
                           back-dating
         :param uri: HTTP endpoint to use; defaults to
-                    ``KISSmetrics.SET_URI``
+                    ``KISSmetrics.SET_PATH``
 
         :returns: an HTTP response for the request
         :rtype: `urllib3.response.HTTPResponse`
 
         """
         this_request = request.set(self.key, person, timestamp=timestamp,
-                                   properties=properties, uri=uri)
+                                   properties=properties,
+                                   scheme=self.trk_scheme, host=self.trk_host,
+                                   path=path)
         return self.request(this_request)
 
-    def alias(self, person, identity, uri=KISSmetrics.ALIAS_URI):
+    def alias(self, person, identity, path=KISSmetrics.ALIAS_PATH):
         """Map `person` to `identity`; actions done by one resolve the other.
 
         :param person: consider as same individual ``identity``; the
@@ -85,7 +88,7 @@ class Client:
                          of the alias operation
         :type identity: str or unicode
         :param uri: HTTP endpoint to use; defaults to
-                    ``KISSmetrics.ALIAS_URI``
+                    ``KISSmetrics.ALIAS_PATH``
 
         :returns: an HTTP response for the request
         :rtype: `urllib3.response.HTTPResponse`
@@ -107,5 +110,7 @@ class Client:
         <http://support.kissmetrics.com/apis/specifications.html#aliasing-users>`_.
 
         """
-        this_request = request.alias(self.key, person, identity, uri=uri)
+        this_request = request.alias(self.key, person, identity,
+                                     scheme=self.trk_scheme,
+                                     host=self.trk_host, path=path)
         return self.request(this_request)

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-KEY_PARAM = '_k'
-PERSON_PARAM = '_p'
-EVENT_NAME_PARAM = '_n'
-TIME_PARAM = '_t'
-TIME_FLAG_PARAM = '_d'
-ALIAS_PARAM = '_n'
+KEY_KEY = '_k'
+PERSON_KEY = '_p'
+EVENT_NAME_KEY = '_n'
+TIME_KEY = '_t'
+TIME_FLAG_KEY = '_d'
+ALIAS_KEY = '_n'
 
 
 try:
@@ -19,13 +19,13 @@ def create_query(key, person, event=None, timestamp=None,
     if properties is None:
         properties = {}
 
-    params = {KEY_PARAM: key, PERSON_PARAM: person}
+    query_dict = {KEY_KEY: key, PERSON_KEY: person}
     if timestamp:
-        params[TIME_FLAG_PARAM] = 1
-        params[TIME_PARAM] = timestamp
+        query_dict[TIME_FLAG_KEY] = 1
+        query_dict[TIME_KEY] = timestamp
     if event:
-        params[EVENT_NAME_PARAM] = event
+        query_dict[EVENT_NAME_KEY] = event
     if identity:
-        params[ALIAS_PARAM] = identity
-    params.update(properties)
-    return urlencode(params)
+        query_dict[ALIAS_KEY] = identity
+    query_dict.update(properties)
+    return urlencode(query_dict)

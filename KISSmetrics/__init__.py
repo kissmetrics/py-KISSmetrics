@@ -1,23 +1,25 @@
 # -*- coding: utf-8 -*-
 
-#: Current URI for all Tracking service endpoints.
+#: Default host for tracking service endpoint
 TRACKING_HOSTNAME = 'trk.kissmetrics.com'
-#: Default protocol for inbound request to the Tracking service.
-TRACKING_PROTOCOL = 'http'
 
-#: The URI for the endpoint to record events via the Tracking service.
+#: Default scheme for requests to tracking service endpoint
+TRACKING_SCHEME = 'http'
+
+#: Path to record events via tracking service
 #:
-#: :see: http://support.kissmetrics.com/apis/specifications#recording-an-event
-RECORD_URI = 'e'
-#: The URI for the endpoint to set a property via the Tracking service.
+#: .. seealso:: http://support.kissmetrics.com/apis/specifications#recording-an-event
+RECORD_PATH = 'e'
+
+#: Path to set a property via tracking service
 #:
-#: :see: http://support.kissmetrics.com/apis/specifications#setting-properties
-SET_URI = 's'
-#: The URI for the endpoint that aliases identities performing events via the
-#: Tracking service.
+#: .. seealso:: http://support.kissmetrics.com/apis/specifications#setting-properties
+SET_PATH = 's'
+
+#: Path to alias two identities via tracking service
 #:
-#: :see: http://support.kissmetrics.com/apis/specifications#aliasing-users
-ALIAS_URI = 'a'
+#: .. seealso:: http://support.kissmetrics.com/apis/specifications#aliasing-users
+ALIAS_PATH = 'a'
 
 __author__ = 'Ernest W. Durbin III <ewdurbin@gmail.com>'
 __license__ = 'MIT'
