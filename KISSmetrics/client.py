@@ -6,7 +6,7 @@ from urllib3 import PoolManager
 
 
 class Client:
-    """Interface to KISSmetrics tracking service."""
+    """Interface to KISSmetrics tracking service"""
 
     def __init__(self, key, trk_host=KISSmetrics.TRACKING_HOSTNAME,
                  trk_proto=KISSmetrics.TRACKING_PROTOCOL):
