@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 if __name__ == '__main__':
     import os, sys
     sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/..'))

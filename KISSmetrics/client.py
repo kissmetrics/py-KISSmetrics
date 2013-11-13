@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import KISSmetrics
 from KISSmetrics import request
 from urllib3 import PoolManager

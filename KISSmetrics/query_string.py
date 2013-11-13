@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 KEY_PARAM = '_k'
 PERSON_PARAM = '_p'
 EVENT_NAME_PARAM = '_n'
