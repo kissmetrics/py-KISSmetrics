@@ -19,7 +19,6 @@ import os
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, '..')
-sys.path.insert(0, '../env/lib/python2.7/site-packages/')
 
 
 
@@ -55,10 +54,10 @@ master_doc = 'index'
 project = u'py-KISSmetrics'
 copyright = u'2013, Ernest W. Durbin III, Nick Murphy'
 
-# OH THE HORROR!  I wanted to include the version from the definition in the 
+# OH THE HORROR!  I wanted to include the version from the definition in the
 # within module, but for the LIFE of me I can't get the paths in this to work
 #
-# TODO - become enlightened such that this blight is not needed 
+# TODO - become enlightened such that this blight is not needed
 import re
 base_path = os.path.dirname(__file__)
 fp = open(os.path.join(base_path, '../..', 'KISSmetrics', '__init__.py'))
@@ -261,7 +260,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'py-KISSmetrics', u'py-KISSmetrics Documentation',
-   u'Ernest W. Durbin III, Nick Murphy', 'py-KISSmetrics', 
+   u'Ernest W. Durbin III, Nick Murphy', 'py-KISSmetrics',
     'Interface to KISSmetrics tracking service.', 'Miscellaneous'),
 ]
 
