@@ -42,7 +42,7 @@ class Client:
         :type properties: dict
         :param timestamp: when the `event` was performed; optional for
                           back-dating
-        :param uri: HTTP endpoint to use; defaults to
+        :param path: HTTP endpoint to use; defaults to
                     ``KISSmetrics.RECORD_PATH``
 
         :returns: an HTTP response for the request
@@ -57,7 +57,7 @@ class Client:
         return self.request(this_request)
 
     def set(self, person, properties=None, timestamp=None,
-            uri=KISSmetrics.SET_PATH):
+            path=KISSmetrics.SET_PATH):
         """Set a property (or properties) for a `person`.
 
         :param person: individual to associate properties with
@@ -65,7 +65,7 @@ class Client:
         :type properties: dict
         :param timestamp: when the `event` was performed; optional for
                           back-dating
-        :param uri: HTTP endpoint to use; defaults to
+        :param path: HTTP endpoint to use; defaults to
                     ``KISSmetrics.SET_PATH``
 
         :returns: an HTTP response for the request
@@ -87,7 +87,7 @@ class Client:
         :param identity: consider as an alias of ``person``; the target
                          of the alias operation
         :type identity: str or unicode
-        :param uri: HTTP endpoint to use; defaults to
+        :param path: HTTP endpoint to use; defaults to
                     ``KISSmetrics.ALIAS_PATH``
 
         :returns: an HTTP response for the request
