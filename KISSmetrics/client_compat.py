@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 import KISSmetrics
 from KISSmetrics import Client
 
@@ -10,7 +9,7 @@ import datetime
 port_map = {'80': 'http', '443': 'https'}
 
 
-class ClientCompat:
+class ClientCompat(object):
     """Compatibility interface to KISSmetrics tracking service
 
     .. warning::

@@ -5,7 +5,7 @@ from KISSmetrics import request
 from urllib3 import PoolManager
 
 
-class Client:
+class Client(object):
     """Interface to KISSmetrics tracking service"""
 
     def __init__(self, key, trk_host=KISSmetrics.TRACKING_HOSTNAME,
@@ -22,7 +22,7 @@ class Client:
 
         """
         self.key = key
-        if trk_scheme not in ['http', 'https']:
+        if trk_scheme not in ('http', 'https'):
             raise ValueError('trk_scheme must be one of (http, https)')
         self.http = PoolManager()
         self.trk_host = trk_host
