@@ -60,7 +60,7 @@ copyright = u'2013, Ernest W. Durbin III, Nick Murphy'
 # TODO - become enlightened such that this blight is not needed
 import re
 base_path = os.path.dirname(__file__)
-fp = open(os.path.join(base_path, '../..', 'KISSmetrics', '__init__.py'))
+fp = open(os.path.join(base_path, '..', 'KISSmetrics', '__init__.py'))
 VERSION = re.compile(r".*__version__ = '(.*?)'",
                      re.S).match(fp.read()).group(1)
 fp.close()
