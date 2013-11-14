@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 if __name__ == '__main__':
-    import os, sys
+    import os
+    import sys
     sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/..'))
 
 import unittest
 import pytest
-import json
 import datetime
 
 try:
@@ -37,6 +37,7 @@ class KISSmetricsClientTestCase(unittest.TestCase):
     def test_client_scheme(self):
         with pytest.raises(ValueError):
             client = KISSmetrics.Client(key='foo', trk_scheme='ssh')
+            del client
 
 
 class KISSmetricsClientCompatTestCase(unittest.TestCase):
@@ -58,6 +59,7 @@ class KISSmetricsClientCompatTestCase(unittest.TestCase):
     def test_client_compat_scheme(self):
         with pytest.raises(ValueError):
             client = KISSmetrics.ClientCompat(key='foo', host='trk.kissmetrics.com:22')
+            del client
 
     def test_client_compat_log_file(self):
         assert self.client.log_file() == '/tmp/kissmetrics_error.log'
