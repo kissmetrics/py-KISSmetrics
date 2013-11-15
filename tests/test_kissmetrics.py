@@ -36,8 +36,7 @@ class KISSmetricsClientTestCase(unittest.TestCase):
 
     def test_client_scheme(self):
         with pytest.raises(ValueError):
-            client = KISSmetrics.Client(key='foo', trk_scheme='ssh')
-            del client
+            KISSmetrics.Client(key='foo', trk_scheme='ssh')
 
 
 class KISSmetricsClientCompatTestCase(unittest.TestCase):
@@ -58,8 +57,7 @@ class KISSmetricsClientCompatTestCase(unittest.TestCase):
 
     def test_client_compat_scheme(self):
         with pytest.raises(ValueError):
-            client = KISSmetrics.ClientCompat(key='foo', host='trk.kissmetrics.com:22')
-            del client
+            KISSmetrics.ClientCompat(key='foo', host='trk.kissmetrics.com:22')
 
     def test_client_compat_log_file(self):
         assert self.client.log_file() == '/tmp/kissmetrics_error.log'
