@@ -28,9 +28,6 @@ class Client(object):
         self.trk_host = trk_host
         self.trk_scheme = trk_scheme
 
-    def request(self, uri, method="GET"):
-        return self.http.request(method, uri)
-
     def record(self, person, event, properties=None, timestamp=None,
                path=KISSmetrics.RECORD_PATH):
         """Record `event` for `person` with any `properties`.
@@ -53,7 +50,7 @@ class Client(object):
                                       properties=properties,
                                       scheme=self.trk_scheme,
                                       host=self.trk_host, path=path)
-        return self.request(this_request)
+        return self._request(this_request)
 
     def set(self, person, properties=None, timestamp=None,
             path=KISSmetrics.SET_PATH):
@@ -75,7 +72,7 @@ class Client(object):
                                    properties=properties,
                                    scheme=self.trk_scheme, host=self.trk_host,
                                    path=path)
-        return self.request(this_request)
+        return self._request(this_request)
 
     def alias(self, person, identity, path=KISSmetrics.ALIAS_PATH):
         """Map `person` to `identity`; actions done by one resolve to other.
@@ -112,4 +109,7 @@ class Client(object):
         this_request = request.alias(self.key, person, identity,
                                      scheme=self.trk_scheme,
                                      host=self.trk_host, path=path)
-        return self.request(this_request)
+        return self._request(this_request)
+
+    def _request(self, uri, method='GET'):
+        return self.http.request(method, uri)
