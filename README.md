@@ -14,8 +14,7 @@ Support for:
   - Python 2.6, 2.7, 3.2, 3.3
 
 Also tested against:
-  - pypy
-    - versions vary...
+  - PyPy (Generally the latest release)
 
 ## Using this library
 
