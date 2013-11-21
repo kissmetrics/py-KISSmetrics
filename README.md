@@ -62,7 +62,7 @@ cd py-KISSmetrics
 virtualenv env
 source env/bin/activate
 pip install -r test-requirements.txt
-py.test --cov KISSmetrics tests/
+py.test
 ```
 
 ### Running Tests
