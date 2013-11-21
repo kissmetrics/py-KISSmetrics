@@ -52,7 +52,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'py-KISSmetrics'
-copyright = u'2013, Ernest W. Durbin III, Nick Murphy'
+copyright = u'2013, KISSmetrics'
 
 # OH THE HORROR!  I wanted to include the version from the definition in the
 # within module, but for the LIFE of me I can't get the paths in this to work
