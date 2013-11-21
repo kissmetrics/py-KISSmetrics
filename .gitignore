@@ -7,3 +7,9 @@
 
 # Tests
 /.coverage
+
+# Editable install
+/py_KISSmetrics.egg-info
+
+# tox
+/.tox
