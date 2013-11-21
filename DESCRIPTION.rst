@@ -11,7 +11,7 @@ Support for:
 Also tested against:
   - PyPy (Generally the latest release)
 
-Documentation: http://py-kissmetrics.readthedocs.org/en/v1.0.0/
+Documentation: http://py-kissmetrics.readthedocs.org/
 
 
 Using this library
