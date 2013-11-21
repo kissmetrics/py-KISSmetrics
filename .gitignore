@@ -9,4 +9,7 @@
 /.coverage
 
 # Editable install
-py_KISSmetrics.egg-info
+/py_KISSmetrics.egg-info
+
+# tox
+/.tox

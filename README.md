@@ -64,3 +64,12 @@ source env/bin/activate
 pip install -r test-requirements.txt
 py.test --cov KISSmetrics tests/
 ```
+
+### Running Tests
+
+If you'd like to run tests against all of our declared supported Pythons, you can do so using [tox](http://tox.readthedocs.org/en/latest/)
+
+```
+pip install tox
+tox
+```
