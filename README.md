@@ -61,7 +61,6 @@ git clone https://github.com/kissmetrics/py-KISSmetrics.git
 cd py-KISSmetrics
 virtualenv env
 source env/bin/activate
-pip install -r requirements.txt
 pip install -r test-requirements.txt
 py.test --cov KISSmetrics tests/
 ```
