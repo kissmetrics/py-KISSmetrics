@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-import pytest
 import datetime
 
 try:
@@ -30,8 +29,7 @@ class KISSmetricsClientTestCase(unittest.TestCase):
         assert http.request('GET', 'http://httpbin.org').status == 200
 
     def test_client_scheme(self):
-        with pytest.raises(ValueError):
-            KISSmetrics.Client(key='foo', trk_scheme='ssh')
+        self.assertRaises(ValueError, KISSmetrics.Client, key='foo', trk_scheme='ssh')
 
 
 class KISSmetricsClientCompatTestCase(unittest.TestCase):
@@ -51,23 +49,20 @@ class KISSmetricsClientCompatTestCase(unittest.TestCase):
         assert http.request('GET', 'http://httpbin.org').status == 200
 
     def test_client_compat_scheme(self):
-        with pytest.raises(ValueError):
-            KISSmetrics.ClientCompat(key='foo', host='trk.kissmetrics.com:22')
+        self.assertRaises(ValueError, KISSmetrics.ClientCompat, key='foo', host='trk.kissmetrics.com:22')
 
     def test_client_compat_log_file(self):
         assert self.client.log_file() == '/tmp/kissmetrics_error.log'
 
     def test_client_compat_check_identify(self):
-        with pytest.raises(Exception):
-            client = KISSmetrics.ClientCompat(key='foo')
-            client.reset()
-            client.check_identify()
+        client = KISSmetrics.ClientCompat(key='foo')
+        client.reset()
+        self.assertRaises(Exception, client.check_identify)
 
     def test_client_compat_check_init(self):
-        with pytest.raises(Exception):
-            client = KISSmetrics.ClientCompat(key='foo')
-            client.reset()
-            client.check_init()
+        client = KISSmetrics.ClientCompat(key='foo')
+        client.reset()
+        self.assertRaises(Exception, client.check_init)
 
     def test_client_compat_now(self):
         now = datetime.datetime.now()
