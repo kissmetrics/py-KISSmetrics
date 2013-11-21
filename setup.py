@@ -30,7 +30,7 @@ setup(
     version=version,
     license='MIT',
     description="Official KISSmetrics client library.",
-    long_description=read('README.md'),
+    long_description=read('DESCRIPTION.rst'),
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',

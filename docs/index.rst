@@ -6,12 +6,10 @@
 py-KISSmetrics documentation
 ============================
 
-Contents:
-
 .. toctree::
    :maxdepth: 2
 
-.. automodule:: KISSmetrics 
+.. automodule:: KISSmetrics
 
 .. autoclass:: Client
    :members:

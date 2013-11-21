@@ -1,10 +1,9 @@
 py-KISSmetrics
-==============
-
-[![Build Status](https://travis-ci.org/kissmetrics/py-KISSmetrics.png?branch=master)](https://travis-ci.org/kissmetrics/py-KISSmetrics)
-[![Coverage Status](https://coveralls.io/repos/kissmetrics/py-KISSmetrics/badge.png)](https://coveralls.io/r/kissmetrics/py-KISSmetrics)
+--------------
 
 KISSmetrics tracking API wrapper for Python
+
+A description of the API can be found at: http://support.kissmetrics.com/apis/specifications.html
 
 Support for:
   - Python 2.6, 2.7, 3.2, 3.3
@@ -12,11 +11,12 @@ Support for:
 Also tested against:
   - PyPy (Generally the latest release)
 
-Documentation: http://py-kissmetrics.readthedocs.org
+Documentation: http://py-kissmetrics.readthedocs.org/
 
-## Using this library
 
-```
+Using this library
+==================
+
 >>> import KISSmetrics
 >>> KM = KISSmetrics.Client(key='mySuperSecretApiKey')
 >>> KM.record('bob@bob.com', 'Viewed Homepage')
@@ -28,17 +28,18 @@ Documentation: http://py-kissmetrics.readthedocs.org
 >>> KM.set('bob@bob.com', {'gender': 'male'})
 <urllib3.response.HTTPResponse object at 0x...>
 
-```
 
-## Compatibility client
 
-A compatibility client is provided which is intended to act like the previous generation of Python library [here](https://github.com/kissmetrics/KISSmetrics/blob/master/KISSmetrics/__init__.py)
+Compatibility client
+====================
+
+A compatibility client is provided which is intended to act like the previous generation of Python library here_.
 
 This interface is provided for compatibility only, and will not be supported in the future.
 
-### Example Usage
+Example Usage
++++++++++++++
 
-```
 >>> from KISSmetrics import KM
 >>> km = KM("this is your API key")
 >>> km.key
@@ -52,24 +53,7 @@ This interface is provided for compatibility only, and will not be supported in 
 >>> km.record('Signed Up', {'_d' : 1, '_t' : 1234567890})
 >>> km.set({'gender' : 'male'})
 
-```
 
-## Development setup
+.. _here: https://github.com/kissmetrics/KISSmetrics/blob/master/KISSmetrics/__init__.py
 
-```
-git clone https://github.com/kissmetrics/py-KISSmetrics.git
-cd py-KISSmetrics
-virtualenv env
-source env/bin/activate
-pip install -r test-requirements.txt
-py.test
-```
 
-### Running Tests
-
-If you'd like to run tests against all of our declared supported Pythons, you can do so using [tox](http://tox.readthedocs.org/en/latest/)
-
-```
-pip install tox
-tox
-```
