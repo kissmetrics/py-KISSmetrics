@@ -14,6 +14,13 @@ fp.close()
 
 version = VERSION
 
+def read(fname):
+    try:
+        path = os.path.join(os.path.dirname(__file__), fname)
+        return open(path).read()
+    except IOError:
+        return ""
+
 requirements =      ['urllib3==1.7.1']
 test_requirements = ['pytest',
                      'pytest-cov']
@@ -23,7 +30,7 @@ setup(
     version=version,
     license='MIT',
     description="Official KISSmetrics client library.",
-    long_description="",
+    long_description=read('README.md'),
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
