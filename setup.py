@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
-from pip.req import parse_requirements
+from setuptools import setup
 
 import os
 import re
@@ -13,16 +12,11 @@ VERSION = re.compile(r".*__version__ = '(.*?)'",
                      re.S).match(fp.read()).group(1)
 fp.close()
 
-REQS_PATH = os.path.join(base_path, 'requirements.txt')
-TEST_REQS_PATH = os.path.join(base_path, 'test-requirements.txt')
-
-install_reqs = parse_requirements(REQS_PATH)
-test_reqs = parse_requirements(TEST_REQS_PATH)
-
-requirements = [str(ir.req) for ir in install_reqs]
-test_requirements = [str(ir.req) for ir in test_reqs]
-
 version = VERSION
+
+requirements =      ['urllib3==1.7.1']
+test_requirements = ['pytest',
+                     'pytest-cov']
 
 setup(
     name='py-KISSmetrics',
@@ -46,6 +40,7 @@ setup(
     author_email='ewdurbin@gmail.com',
     url='https://github.com/kissmetrics/py-KISSmetrics/',
     packages=['KISSmetrics'],
+    test_suite='KISSmetrics.tests',
     install_requires=requirements,
     tests_require=test_requirements,
 )
