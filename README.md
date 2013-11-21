@@ -12,7 +12,9 @@ KISSmetrics tracking API wrapper for Python
 
 Support for:
   - Python 2.6, 2.7, 3.2, 3.3
-  - pypy 1.9
+
+Also tested against:
+  - PyPy (Generally the latest release)
 
 ## Using this library
 
@@ -61,7 +63,15 @@ git clone https://github.com/kissmetrics/py-KISSmetrics.git
 cd py-KISSmetrics
 virtualenv env
 source env/bin/activate
-pip install -r requirements.txt
 pip install -r test-requirements.txt
-py.test --cov KISSmetrics tests/
+py.test
+```
+
+### Running Tests
+
+If you'd like to run tests against all of our declared supported Pythons, you can do so using [tox](http://tox.readthedocs.org/en/latest/)
+
+```
+pip install tox
+tox
 ```

@@ -7,11 +7,10 @@ python:
   - "pypy"
 # command to install dependencies
 install:
-  - pip install -r requirements.txt --use-mirrors
   - pip install -r test-requirements.txt --use-mirrors
   - pip install coveralls --use-mirrors
 # command to run tests
 script:
-  - py.test --cov KISSmetrics tests/
+  - py.test
 after_success:
   - coveralls
