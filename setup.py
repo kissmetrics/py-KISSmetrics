@@ -21,7 +21,7 @@ def read(fname):
     except IOError:
         return ""
 
-requirements =      ['urllib3==1.7.1']
+requirements =      ['urllib3>=1.2,<2.0']
 test_requirements = ['pytest',
                      'pytest-cov']
 

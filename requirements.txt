@@ -1,2 +1,2 @@
 -e .
-urllib3
+urllib3>=1.2,<2.0
