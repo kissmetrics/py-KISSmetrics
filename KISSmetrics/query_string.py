@@ -43,7 +43,7 @@ def create_query(key, person, event=None, timestamp=None,
     query_dict = {KEY_KEY: key, PERSON_KEY: person}
     if timestamp:
         query_dict[TIME_FLAG_KEY] = 1
-        query_dict[TIME_KEY] = timestamp
+        query_dict[TIME_KEY] = int(timestamp)
     if event:
         query_dict[EVENT_NAME_KEY] = event
     if identity:

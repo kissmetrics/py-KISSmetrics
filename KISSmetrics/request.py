@@ -19,10 +19,6 @@ def record(key, person, event, timestamp=None, properties=None,
            scheme=KISSmetrics.TRACKING_SCHEME,
            host=KISSmetrics.TRACKING_HOSTNAME,
            path=KISSmetrics.RECORD_PATH):
-
-    if timestamp:
-        timestamp = int(timestamp)
-
     query = create_query(key, person, event=event, timestamp=timestamp,
                          properties=properties)
     return _request(scheme=scheme, netloc=host, path=path, query=query,
