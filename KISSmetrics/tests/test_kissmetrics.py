@@ -113,8 +113,26 @@ class TestKISSmetricsRequestFunctionsTestCase(unittest.TestCase):
         assert parse_qs(query_string)['_p'] == ['bar']
         assert parse_qs(query_string)['_n'] == ['fizzed']
 
-    def test_record_with_timestamp(self):
+    def test_record_with_integer_timestamp(self):
         query_string = KISSmetrics.request.record(key='foo', person='bar', event='fizzed', timestamp=1381849312)
+        assert urlparse(query_string).path == '/e'
+        query_string = urlparse(query_string).query
+        assert parse_qs(query_string)['_k'] == ['foo']
+        assert parse_qs(query_string)['_p'] == ['bar']
+        assert parse_qs(query_string)['_d'] == ['1']
+        assert parse_qs(query_string)['_t'] == ['1381849312']
+
+    def test_record_with_whole_float_timestamp(self):
+        query_string = KISSmetrics.request.record(key='foo', person='bar', event='fizzed', timestamp=1381849312.0)
+        assert urlparse(query_string).path == '/e'
+        query_string = urlparse(query_string).query
+        assert parse_qs(query_string)['_k'] == ['foo']
+        assert parse_qs(query_string)['_p'] == ['bar']
+        assert parse_qs(query_string)['_d'] == ['1']
+        assert parse_qs(query_string)['_t'] == ['1381849312']
+
+    def test_record_with_non_whole_float_timestamp(self):
+        query_string = KISSmetrics.request.record(key='foo', person='bar', event='fizzed', timestamp=1381849312.5)
         assert urlparse(query_string).path == '/e'
         query_string = urlparse(query_string).query
         assert parse_qs(query_string)['_k'] == ['foo']
