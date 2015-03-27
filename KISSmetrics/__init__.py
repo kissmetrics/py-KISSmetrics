@@ -23,7 +23,7 @@ ALIAS_PATH = 'a'
 
 __author__ = 'Ernest W. Durbin III <ewdurbin@gmail.com>'
 __license__ = 'MIT'
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 from .client import Client
 from .client_compat import ClientCompat
