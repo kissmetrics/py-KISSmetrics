@@ -3,7 +3,7 @@ py-KISSmetrics
 
 KISSmetrics tracking API wrapper for Python
 
-A description of the API can be found at: http://support.kissmetrics.com/apis/specifications.html
+A description of the API can be found at: https://support.kissmetrics.io/reference#api-specifications-1
 
 Support for:
   - Python 2.6, 2.7, 3.2, 3.3

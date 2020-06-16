@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 #: Default host for tracking service endpoint
-TRACKING_HOSTNAME = 'trk.kissmetrics.com'
+TRACKING_HOSTNAME = 'trk.kissmetrics.io'
 
 #: Default scheme for requests to tracking service endpoint
 TRACKING_SCHEME = 'http'

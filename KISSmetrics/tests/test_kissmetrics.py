@@ -49,7 +49,7 @@ class KISSmetricsClientCompatTestCase(unittest.TestCase):
         assert http.request('GET', 'http://httpbin.org').status == 200
 
     def test_client_compat_scheme(self):
-        self.assertRaises(ValueError, KISSmetrics.ClientCompat, key='foo', host='trk.kissmetrics.com:22')
+        self.assertRaises(ValueError, KISSmetrics.ClientCompat, key='foo', host='trk.kissmetrics.io:22')
 
     def test_client_compat_log_file(self):
         assert self.client.log_file() == '/tmp/kissmetrics_error.log'
