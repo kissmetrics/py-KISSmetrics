@@ -7,7 +7,7 @@ py-KISSmetrics
 KISSmetrics tracking API wrapper for Python
 
 Support for:
-  - Python 2.6, 2.7, 3.2, 3.3, 3.4
+  - Python 3.5, 3.6
 
 Also tested against:
   - PyPy (Generally the latest release)
