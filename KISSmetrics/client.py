@@ -103,7 +103,7 @@ class Client(object):
         change per request or per session).
 
         For more information see the API Specifications on `Aliasing
-        <http://support.kissmetrics.com/apis/specifications.html#aliasing-users>`_.
+        <https://support.kissmetrics.io/reference#api-specifications-1>`_.
 
         """
         this_request = request.alias(self.key, person, identity,

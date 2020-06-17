@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 #: Default host for tracking service endpoint
-TRACKING_HOSTNAME = 'trk.kissmetrics.com'
+TRACKING_HOSTNAME = 'trk.kissmetrics.io'
 
 #: Default scheme for requests to tracking service endpoint
 TRACKING_SCHEME = 'http'
@@ -23,7 +23,7 @@ ALIAS_PATH = 'a'
 
 __author__ = 'Ernest W. Durbin III <ewdurbin@gmail.com>'
 __license__ = 'MIT'
-__version__ = '1.0.1'
+__version__ = '1.1.0'
 
 from .client import Client
 from .client_compat import ClientCompat
